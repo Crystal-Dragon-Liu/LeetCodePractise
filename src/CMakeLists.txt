@@ -1,0 +1,2 @@
+file(GLOB_RECURSE LeetCodePractice_sources ${PROJECT_SOURCE_DIR}/src/*/*.cpp ${PROJECT_SOURCE_DIR}/src/*/*/*.cpp ${PROJECT_SOURCE_DIR}/src/*/*/*/*.cpp)
+add_library(LeetCodePractice_shared SHARED ${LeetCodePractice_sources})

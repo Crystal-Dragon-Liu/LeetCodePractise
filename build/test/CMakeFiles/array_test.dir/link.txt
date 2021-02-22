@@ -1,1 +1,0 @@
-/usr/bin/c++   -fPIC -Wall -Wextra -Werror -march=native -Wno-reorder -Wno-unused-parameter -Wno-attributes   -fPIC CMakeFiles/array_test.dir/easy_test/array_test.cpp.o  -o array_test -Wl,-rpath,/home/LeetCodePractise/LeetCodePractise/build/src ../src/libLeetCodePractice_shared.so ../lib/libgtest.a ../lib/libgmock_main.a ../lib/libgmock.a ../lib/libgtest.a -lpthread 

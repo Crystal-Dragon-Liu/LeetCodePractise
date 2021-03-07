@@ -27,6 +27,10 @@
 
 //virtual header.
 #include <iostream>
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <string>
 
 class MyLinkedList {
 public:
@@ -80,7 +84,7 @@ public:
         if(index > _size || index < 0) return nullptr;
         LinkedNode* cur_node = _dummy_head;
         while(index--)
-        {
+        { 
             cur_node = cur_node->_next;
         }
         return cur_node;
@@ -294,27 +298,62 @@ struct Node{
 };
 const int len  = 100;
 using Bucket =  std::vector<Node*>;
+using num_list = std::vector<int>;
 class MyHashSet
 {
 public:
 
     MyHashSet(){
-        _bucket = Bucket(len, new Node(INVALID_VALUE));
+        // _bucket = Bucket(len, new Node(INVALID_VALUE));
+        for(int i = 0; i < len; i++)
+        {
+            _bucket.push_back(new Node(INVALID_VALUE));
+            _num_list.push_back(0);
+        }
         // operator new is to create a list of node with the dummy head which contains no data.
     }
     // TODO there are still many bugs regarding to destruction.
     ~MyHashSet()
     {
-        for(Bucket::iterator iter = _bucket.begin(); iter != _bucket.end(); iter++)
+        for(size_t i = 0; i < _bucket.size(); i++)
         {
-            Node* dummy_head = *iter;
-            if(!dummy_head->_next)
-             {
-                 _bucket.erase(iter);
-             }
+            if(_bucket[i]->_next == nullptr)
+            {
+                delete _bucket[i];
+                _bucket[i] = NULL;
+            }
+            else
+            {
+                int index = _num_list[i];
+                //delete the rest of nodes.
+                 while(index)
+                {
+                        Node* node = at(i, index);
+                        delete node;
+                        index--;
+                }
+                if(_bucket[i] != nullptr)
+                {
+                    delete _bucket[i];
+                    _bucket[i] = NULL;
+                }
+            }
         }
         _bucket.clear();
+        _bucket.shrink_to_fit();
     }
+    Node* at(int index_bucket, int index)
+    {
+        //notice the boundary condition.
+        if(index > _num_list[index_bucket] || index < 0) return nullptr;
+        Node* cur_node = _bucket[index_bucket];
+        while(index-- && cur_node != nullptr)
+        {
+            cur_node = cur_node->_next;
+        }
+        return cur_node;
+    }
+
     void add(int key)
     {
         int hash_value = key % len;
@@ -326,22 +365,30 @@ public:
         {
             // the first node didn't store any key, meaning we could directly store our "key".
             Node* node = new Node(key);
-            temp_node->_next = node;
+            dummy_head->_next = node;
+            _num_list[hash_value]++;
             return;
         }
-        // if(temp_node->_val == -1) {
-        //     temp_node->_val = key;
-        //     return;
+        //  if(temp_node->_val == -1) {
+        //      temp_node->_val = key;
+        //      return;
         // }
         else{
             while(temp_node)
             {
                 if(temp_node->_val == key) return; //this key has been added to MyHashSet obj.
+                if(temp_node->_val == -1)
+                {
+                    temp_node->_val = key;
+                    _num_list[hash_value]++;
+                    return;
+                }
                 if(!(temp_node->_next))
                 {
                     //if there is no more Node ptr to store the key.
                     Node* node = new Node(key);
                     temp_node->_next = node;
+                    _num_list[hash_value]++;
                     return;
                 }
                 temp_node = temp_node->_next;
@@ -361,6 +408,7 @@ public:
                 if(temp_node->_val == key)
                     {
                         temp_node->_val = -1;
+                        // _num_list[hash_value]--;
                         return;
                     }
                 temp_node = temp_node->_next;
@@ -378,6 +426,25 @@ public:
         }
         return false;
     }
+
+    // void deleteAtIndex(int hash_value, int key) {
+    //     // if(index > _size || index < 0) return;
+    //     // LinkedNode* cur_node = at(index);
+    //     Node* cur_node = _bucket[hash_value];
+    //     if(cur_node->_next == nullptr) return;
+    //     else{
+    //         while ()
+    //         {
+    //             /* code */
+    //         }
+            
+    //     }
+    //     Node* deleted_node = cur_node->_next;
+    //     if(deleted_node == nullptr) return;
+    //     cur_node->_next = cur_node->_next->_next;
+    //     delete deleted_node;
+    // }
+
     void print_all_buckets()
     {
         for(size_t i = 0; i < _bucket.size(); i++)
@@ -394,6 +461,7 @@ public:
     }
 private:
     Bucket _bucket;
+    num_list _num_list; // this vector is about to store the size of each bucket.
 };
 
 
@@ -404,6 +472,237 @@ private:
  * obj->remove(key);
  * bool param_3 = obj->contains(key);
  */
+
+
+//------------------------------------------------------------------------------------------------------------//
+// Design a HashMap without using any built-in hash table libraries.
+
+// To be specific, your design should include these functions:
+
+// put(key, value) : Insert a (key, value) pair into the HashMap. If the value already exists in the HashMap, update the value.
+// get(key): Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key.
+// remove(key) : Remove the mapping for the value key if this map contains the mapping for the key.
+
+
+struct HashNode
+{
+    int _key;
+    int _value;
+    HashNode* _next;
+    HashNode(int key, int value): _key(key), _value(value), _next(nullptr){}
+};
+using HashBucket = std::vector<HashNode*>;
+#define INVALID_KEY -1
+class MyHashMap {
+public:
+    /** Initialize your data structure here. */
+    MyHashMap() {
+        for(int i = 0; i < len; i++)
+        {
+            _bucket.push_back(new HashNode(INVALID_KEY, INVALID_VALUE));
+            _num_list.push_back(0);
+        }
+    }
+    ~MyHashMap()
+    {
+        for(size_t i = 0; i < _bucket.size(); i++)
+        {
+            if(_bucket[i]->_next == nullptr)
+            {
+                delete _bucket[i];
+                _bucket[i] = NULL;
+            }
+            else
+            {
+                int index = _num_list[i];
+                //delete the rest of nodes.
+                 while(index)
+                {
+                        HashNode* node = at(i, index);
+                        delete node;
+                        index--;
+                }
+                if(_bucket[i] != nullptr)
+                {
+                    delete _bucket[i];
+                    _bucket[i] = NULL;
+                }
+            }
+        }
+        _bucket.clear();
+        _bucket.shrink_to_fit();
+    }
+    
+    HashNode* at(int index_bucket, int index)
+    {
+        //notice the boundary condition.
+        if(index > _num_list[index_bucket] || index < 0) return nullptr;
+        HashNode* cur_node = _bucket[index_bucket];
+        while(index-- && cur_node != nullptr)
+        {
+            cur_node = cur_node->_next;
+        }
+        return cur_node;
+    }
+
+    /** value will always be non-negative. */
+    void put(int key, int value) {
+        int hash_index = key % len;
+        // search the bucket.
+        if(_bucket[hash_index]->_next == nullptr)
+        {
+            //there is no key stored by users before, so we need to create it firstly.
+            HashNode* node = new HashNode(key, value);
+            _bucket[hash_index]->_next = node;
+            _num_list[hash_index]++;
+            return;
+        }
+        HashNode* cur_node = _bucket[hash_index];
+        while(cur_node->_next)
+        {
+            if(cur_node->_next->_key == key)
+                {
+                    cur_node->_next->_value = value;
+                    return;
+                }
+            cur_node = cur_node->_next;
+        }
+        //we have reach the tail of list.
+        HashNode* node = new HashNode(key, value);
+        cur_node->_next = node;
+        _num_list[hash_index]++;       
+    }
+    
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    int get(int key) {
+        int hash_index = key % len;
+        if(_bucket[hash_index]->_next == nullptr)
+        {
+            return INVALID_VALUE;
+        }
+        HashNode* cur_node = _bucket[hash_index];
+        while(cur_node->_next)
+        {
+            if(cur_node->_next->_key == key)
+            {
+                return cur_node->_next->_value;
+            }
+            cur_node = cur_node->_next;
+        }
+        // there is no value we could find by searching the key provided by users.
+        return INVALID_VALUE;
+    }
+
+    void print_all_buckets()
+    {
+        for(size_t i = 0; i < _bucket.size(); i++)
+        {
+            //print each buckets
+            HashNode* node = _bucket[i];
+            
+            if(node->_next!= nullptr)
+            {
+                std::cout << STRIP_BAR << "buckets:" << i << STRIP_BAR << std::endl;
+                while(node != nullptr)
+                {
+                    std::cout << STRIP_BAR << node->_key << "," << node->_value << STRIP_BAR << std::endl;
+                    node = node->_next;
+                }
+            } 
+        }
+    }
+
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    void remove(int key) {
+        int hash_value = key % len;
+        if(_bucket[hash_value]->_next == nullptr)
+        {
+            // the bucket[hash_value] is set to empty which means there is no key input.
+            return;
+        }
+        HashNode* cur_node = _bucket[hash_value];
+        HashNode* next_node = cur_node->_next;
+        while(next_node)
+        {
+            if(next_node->_key == key)
+            {
+                if(next_node->_next)
+                {
+                    cur_node->_next = next_node->_next;
+                }
+                else{
+                    cur_node->_next = nullptr;
+                }
+                delete next_node;
+                _num_list[hash_value]--;
+                return;
+            }
+            cur_node = next_node;
+            next_node = next_node->_next;
+        }
+    }
+private:
+    HashBucket _bucket;
+    num_list _num_list;
+};
+
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap* obj = new MyHashMap();
+ * obj->put(key,value);
+ * int param_2 = obj->get(key);
+ * obj->remove(key);
+ */
+
+
+template<typename _Tp> _Tp stringToTp(std::string &str)
+{
+    std::istringstream iss(str);
+    _Tp num;
+    iss >> num;
+    return num;
+}
+/*
+ * @brief read data from .csv files.
+ */
+template<typename _Tp> std::vector<std::vector<_Tp> > read_data_from_csv_2d(std::string path)
+{
+    std::ifstream inFile(path, std::ios::in);
+    std::vector<std::vector<_Tp> > result;
+    std::vector<_Tp> result_temp;
+    std::string lineStr;
+    while(getline(inFile, lineStr))
+    {
+        std::stringstream ss(lineStr);
+        std::string str;
+        while(getline(ss, str, ','))
+        {
+            result_temp.push_back(stringToTp<_Tp>(str));
+        }
+        result.push_back(result_temp);
+        result_temp.clear();
+    }
+//    Size(result, "result");
+    return result;
+}
+
+template<typename _Tp> std::vector<_Tp> read_data_from_csv_1d(std::string path)
+{
+    std::ifstream in_file(path, std::ios::in);
+    std::vector<_Tp> result;
+    std::string line_str;
+    getline(in_file, line_str);
+    std::stringstream ss(line_str);
+    std::string str;
+    while(getline(ss, str, ','))
+    {
+        result.push_back(stringToTp<_Tp>(str));
+    }
+    return result;
+}
+
+
 
 
 #endif

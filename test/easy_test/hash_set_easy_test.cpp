@@ -1,9 +1,10 @@
 #include "common/utils.h"
 #include "gtest/gtest.h"
 #include "common/config.h"
+#include "common/solution.h"
 class MyHashSet;
 #define INVALUE_RETURN_VALUE -9999
-
+Solution solution_test;
 std::vector<std::string> load_method_name_from_csv(const std::string& path)
 {
     std::ifstream in_file(path, std::ios::in);
@@ -44,7 +45,7 @@ std::vector<int> run_method(MyHashMap& hash_map, const input_list_int& input, co
     {
         if(method[i] == "put")
         {
-            std::cout << "put the ("  << input[i][0] << ", " << input[i][1] << ") into hash map" << std::endl;
+            // std::cout << "put the ("  << input[i][0] << ", " << input[i][1] << ") into hash map" << std::endl;
             hash_map.put(input[i][0], input[i][1]);
             result.push_back(INVALUE_RETURN_VALUE);
         }
@@ -52,23 +53,22 @@ std::vector<int> run_method(MyHashMap& hash_map, const input_list_int& input, co
         {
             int value = hash_map.get(input[i][0]);
             result.push_back(value);
-            std::cout << "get key:" << input[i][0] << ", and result is " << value << std::endl;
+            // std::cout << "get key:" << input[i][0] << ", and result is " << value << std::endl;
         }
         if(method[i] == "remove")
         {
             result.push_back(INVALUE_RETURN_VALUE);
-            std::cout << "remove " << input[i][0] << std::endl;
+            // std::cout << "remove " << input[i][0] << std::endl;
             hash_map.remove(input[i][0]);
         }
-        hash_map.print_all_buckets();
-
-        std::cout << "this is " << i << "method" << std::endl;
+        // hash_map.print_all_buckets();
+        // std::cout << "this is " << i << "method" << std::endl;
         }
     return result;
 
 }
 
-TEST(MyHashSetBasicTest, Test1)
+TEST(MyHashSetBasicTest, DISABLE_Test1)
 {
     MyHashSet my_hash_set;
     my_hash_set.add(1);
@@ -85,7 +85,7 @@ TEST(MyHashSetBasicTest, Test1)
 
 
 
-TEST(MyHashSetBasicTest, Test2)
+TEST(MyHashSetBasicTest, DISABLE_Test2)
 {
     // load the method name.
     std::string method_path("../../../test_data/call_method.csv");
@@ -100,9 +100,24 @@ TEST(MyHashSetBasicTest, Test2)
     EXPECT_EQ(110, input_data.size());
     MyHashMap my_hash_map;
     std::vector<int> result = run_method(my_hash_map, input_data, call_method);
+}
+
+TEST(MyHashSetBasicTest, DISABLE_Test3)
+{
+    std::vector<int> nums{4, 3, 5, 3, 5};
+    Solution solu;
+    EXPECT_EQ(4, solu.singleNumber(nums));
+}
+
+TEST(MyHashSetBasicTest, Test4)
+{
+    std::vector<int> nums1{4, 9, 5};
+    std::vector<int> nums2{9, 4, 9, 8, 4};
+    std::vector<int> result = solution_test.intersection(nums1, nums2);
     for(size_t i = 0; i < result.size(); i++)
     {
         std::cout << result[i] << std::endl;
     }
-
 }
+
+

@@ -701,7 +701,7 @@ template<typename _Tp> std::vector<_Tp> read_data_from_csv_1d(std::string path)
     }
     return result;
 }
-
+extern std::vector<int> splitInt(int n);
 
 
 

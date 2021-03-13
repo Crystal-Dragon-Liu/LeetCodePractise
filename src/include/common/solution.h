@@ -24,5 +24,9 @@ class Solution
             //easy
             bool isHappy(int n);
             int getNext(int n);
+
+            //easy
+            ListNode* getIntersectionNode(ListNode* headA, ListNode* headB);
+
 };
 #endif

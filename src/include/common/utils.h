@@ -50,6 +50,8 @@ public:
         //initialize the size.
         _size = 0;
     }
+
+
     ~MyLinkedList()
     {
         int index = _size;

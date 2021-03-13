@@ -32,3 +32,21 @@ bool Solution::hasCycle(ListNode* head)
         }
         return false;
 }
+
+//TODO there may be some bugs to fix.
+ListNode* getIntersectionNode(ListNode* headA, ListNode* headB)
+{
+    std::unordered_set<ListNode**> set;
+    ListNode* tmp_node = headA;
+    while(tmp_node)
+    {
+        set.insert(&tmp_node);
+        tmp_node = tmp_node->next;
+    }
+    tmp_node = headB;
+    while(tmp_node)
+    {
+        if(set.count(&tmp_node))
+            return tmp_node;
+    }
+}

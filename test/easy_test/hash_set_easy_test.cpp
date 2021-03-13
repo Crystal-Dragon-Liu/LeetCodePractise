@@ -109,7 +109,7 @@ TEST(MyHashSetBasicTest, DISABLE_Test3)
     EXPECT_EQ(4, solu.singleNumber(nums));
 }
 
-TEST(MyHashSetBasicTest, Test4)
+TEST(MyHashSetBasicTest, DISABLE_Test4)
 {
     std::vector<int> nums1{4, 9, 5};
     std::vector<int> nums2{9, 4, 9, 8, 4};
@@ -119,5 +119,12 @@ TEST(MyHashSetBasicTest, Test4)
         std::cout << result[i] << std::endl;
     }
 }
+
+TEST(MyHashSetBasicTest, Test5)
+{
+    
+}
+
+
 
 

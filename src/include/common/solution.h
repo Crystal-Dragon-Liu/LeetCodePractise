@@ -28,5 +28,7 @@ class Solution
             //easy
             ListNode* getIntersectionNode(ListNode* headA, ListNode* headB);
 
+            //easy
+            ListNode* removeNthFromEnd(ListNode* head, int n);
 };
 #endif

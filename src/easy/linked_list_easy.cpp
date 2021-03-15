@@ -34,7 +34,7 @@ bool Solution::hasCycle(ListNode* head)
 }
 
 //TODO there may be some bugs to fix.
-ListNode* getIntersectionNode(ListNode* headA, ListNode* headB)
+ListNode* Solution::getIntersectionNode(ListNode* headA, ListNode* headB)
 {
     std::unordered_set<ListNode**> set;
     ListNode* tmp_node = headA;
@@ -49,4 +49,11 @@ ListNode* getIntersectionNode(ListNode* headA, ListNode* headB)
         if(set.count(&tmp_node))
             return tmp_node;
     }
+    return nullptr;
+}
+
+
+ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
+{
+    return nullptr;
 }

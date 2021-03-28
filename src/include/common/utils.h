@@ -8,6 +8,7 @@
       ListNode *next;
       ListNode(int x) : val(x), next(nullptr) {}
       ListNode(int x, ListNode* next): val(x), next(next){}
+      ListNode(): val(0), next(nullptr) {}
   };
 
 
@@ -42,6 +43,8 @@ public:
         /* data */
         LinkedNode* _next = nullptr;
         int _val = -1;
+        LinkedNode(int x, LinkedNode* next): _val(x), _next(next){}
+        LinkedNode(): _val(-1), _next(nullptr) {}
     };
 
     /** Initialize your data structure here. */
@@ -704,8 +707,10 @@ template<typename _Tp> std::vector<_Tp> read_data_from_csv_1d(std::string path)
     }
     return result;
 }
-extern std::vector<int> splitInt(int n);
 
+
+extern std::vector<int> splitInt(int n);
+extern void printLinkedNodes(ListNode* start_node);
 
 
 #endif

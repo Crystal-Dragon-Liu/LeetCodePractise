@@ -120,6 +120,8 @@ TEST(MyHashSetBasicTest, DISABLE_Test4)
     }
 }
 
+// delete the fourth-to-last LinkedNode.
+
 TEST(MyHashSetBasicTest, Test5)
 {
     

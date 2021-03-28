@@ -13,3 +13,14 @@ std::vector<int> splitInt(int num)
     }
     return num_pro;
 }
+
+void printLinkedNodes(ListNode* start_node)
+{
+        ListNode* node = start_node;
+        std::cout << "==================" << "print nodes" << "==================" << std::endl;
+        while(node != nullptr)
+        {
+            std::cout << "==================" << node->val << "==================" << std::endl;
+            node = node->next;
+        }
+}

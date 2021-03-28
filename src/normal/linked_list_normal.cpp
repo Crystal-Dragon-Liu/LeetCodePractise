@@ -1,6 +1,6 @@
 #include "common/utils.h"
 #include "common/solution.h"
-
+#include <stack>
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 
 /*142.Linked List Cycle 2 */
@@ -41,4 +41,41 @@ ListNode * Solution::detectCycle(ListNode *head)
         slow_node = slow_node->next;
     }
     return fast_node;
+}
+
+// 19
+// Given the head of a linked list, remove the nth node from the end of the list and return its head.
+// Follow up: Could you do this in one pass?
+
+ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
+{
+    // return nullptr;
+    ListNode* dummy_head = new ListNode(0, head); // define a dummy_head for ListNode.
+    std::stack<ListNode*> stk;
+    ListNode* cur_node = dummy_head;
+    while(cur_node)
+    {
+        stk.push(cur_node);
+        cur_node = cur_node->next;
+    }
+    for(int i = 0; i < n; i++)
+    {
+        stk.pop();
+    }
+    ListNode* prev = stk.top();
+    if(prev)
+    {
+        //delete the node
+        ListNode* deleted_node = prev->next;
+        if(deleted_node)
+        {
+            prev->next = deleted_node->next;
+            delete prev->next;
+            prev->next = nullptr;
+        }
+    }
+    ListNode* ans = dummy_head->next;
+    delete dummy_head;
+    dummy_head = nullptr;
+    return ans;
 }

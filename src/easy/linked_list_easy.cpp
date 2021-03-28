@@ -52,8 +52,3 @@ ListNode* Solution::getIntersectionNode(ListNode* headA, ListNode* headB)
     return nullptr;
 }
 
-
-ListNode* Solution::removeNthFromEnd(ListNode* head, int n)
-{
-    return nullptr;
-}

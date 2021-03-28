@@ -30,5 +30,8 @@ class Solution
 
             //normal
             ListNode* removeNthFromEnd(ListNode* head, int n);
+
+            // easy
+            ListNode* reverseList(ListNode* head);
 };
 #endif

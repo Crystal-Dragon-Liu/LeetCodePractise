@@ -52,3 +52,23 @@ ListNode* Solution::getIntersectionNode(ListNode* headA, ListNode* headB)
     return nullptr;
 }
 
+ListNode* Solution::reverseList(ListNode* head)
+{
+    // create a dummy_head for ListNode.
+    ListNode* dummy_head = new ListNode(0, head);
+    ListNode* front_node = dummy_head;
+    ListNode* back_node = dummy_head->next;
+    while(front_node && back_node && back_node->next)
+    {
+        // reverse the front_node and back_node.
+        ListNode* next_node = back_node->next;
+        back_node->next = front_node;
+
+        // switch to next group.
+        front_node = back_node;
+        back_node = next_node;
+    }
+    //delete dummy_head.
+    delete dummy_head;
+    dummy_head = nullptr;
+}

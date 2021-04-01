@@ -17,12 +17,12 @@ void DELETE_LISTNODE(ListNode* node)
 /**
  * Test List:
  * 1. ensure the class MyLinkedList works well.
- * 2. test the interface "addAtHead"
- * 3. test the interface "addAtTail"
- * 4. test the interface "addAtIndex"
- * 5. test the interface "get"
- * 6. test the interface "deleteAtIndex"
-*/
+ * 2. make sure we could delete the n-to-last ListNode correctly.
+ * 3. Given the head of a singly linked list, 
+ *    group all the nodes with odd indices together followed by the nodes with even indices, 
+ *    and return the reordered list.
+ */
+
 TEST(linkedListBasicTest, DISABLED_Test1)
 {
     MyLinkedList linkedList;
@@ -37,14 +37,11 @@ TEST(linkedListBasicTest, DISABLED_Test1)
     linkedList.deleteAtIndex(1);
     std::cout << linkedList.get(1) << std::endl;
     linkedList.printNodes();
-
 }
 
 
-/*
-** make sure we could delete the n-to-last ListNode correctly.
-*/
-TEST(linkedListBasicTest, Test2)
+
+TEST(linkedListBasicTest, DISABLED_Test2)
 {
     // initialize a singly-linked list.
     ListNode* node_0 = new ListNode(6, nullptr);
@@ -66,4 +63,28 @@ TEST(linkedListBasicTest, Test2)
     DELETE_LISTNODE(node_2);
     DELETE_LISTNODE(node_1);
     DELETE_LISTNODE(node_0);
+}
+
+
+
+TEST(linkedListBasicTest, Test3)
+{
+    // initialize a singly-linked list
+    ListNode* node_0 = new ListNode(6, nullptr);
+    ListNode* node_1 = new ListNode(5, node_0);
+    ListNode* node_2 = new ListNode(4, node_1);
+    ListNode* node_3 = new ListNode(3, node_2);
+    ListNode* node_4 = new ListNode(2, node_3);
+    ListNode* node_5 = new ListNode(1, node_4);
+
+    Solution solu;
+    ListNode* result = solu.oddEvenList(node_5);
+    printLinkedNodes(result);
+    // release all of the nodes.
+    DELETE_NODE(node_5);
+    DELETE_NODE(node_4);
+    DELETE_NODE(node_3);
+    DELETE_NODE(node_2);
+    DELETE_NODE(node_1);
+    DELETE_NODE(node_0);
 }

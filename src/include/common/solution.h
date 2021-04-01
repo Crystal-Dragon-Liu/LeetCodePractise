@@ -33,5 +33,11 @@ class Solution
 
             // easy
             ListNode* reverseList(ListNode* head);
+
+            // easy
+            ListNode* removeElements(ListNode* head, int val);
+
+            // normal
+            ListNode* oddEvenList(ListNode* head);
 };
 #endif

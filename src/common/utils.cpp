@@ -24,3 +24,12 @@ void printLinkedNodes(ListNode* start_node)
             node = node->next;
         }
 }
+
+void DELETE_NODE(ListNode* node)
+{
+    if(node != nullptr)
+    {
+        delete node;
+        node = nullptr;
+    }
+}

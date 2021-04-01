@@ -55,10 +55,9 @@ ListNode* Solution::getIntersectionNode(ListNode* headA, ListNode* headB)
 ListNode* Solution::reverseList(ListNode* head)
 {
     // create a dummy_head for ListNode.
-    ListNode* dummy_head = new ListNode(0, head);
-    ListNode* front_node = dummy_head;
-    ListNode* back_node = dummy_head->next;
-    while(front_node && back_node && back_node->next)
+    ListNode* front_node = nullptr;
+    ListNode* back_node = head;
+    while(back_node != nullptr)
     {
         // reverse the front_node and back_node.
         ListNode* next_node = back_node->next;
@@ -69,6 +68,29 @@ ListNode* Solution::reverseList(ListNode* head)
         back_node = next_node;
     }
     //delete dummy_head.
+    return front_node;
+}
+
+
+ListNode* Solution::removeElements(ListNode* head, int val)
+{
+    ListNode* dummy_head = new ListNode(0, head);
+    ListNode* prev_node = dummy_head;
+    ListNode* cur_node = head;
+    while(cur_node != nullptr)
+    {
+        if(cur_node->val == val)
+        {
+            prev_node->next = cur_node->next;
+        }
+        else
+        {
+            prev_node = cur_node;
+        }
+        cur_node = cur_node->next;
+    }
+    ListNode* ret = dummy_head->next;
     delete dummy_head;
     dummy_head = nullptr;
+    return ret;
 }

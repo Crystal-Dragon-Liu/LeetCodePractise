@@ -711,6 +711,5 @@ template<typename _Tp> std::vector<_Tp> read_data_from_csv_1d(std::string path)
 
 extern std::vector<int> splitInt(int n);
 extern void printLinkedNodes(ListNode* start_node);
-
-
+extern void DELETE_NODE(ListNode* node);
 #endif

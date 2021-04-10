@@ -39,5 +39,16 @@ class Solution
 
             // normal
             ListNode* oddEvenList(ListNode* head);
+
+            // easy
+            bool isPalindrome(ListNode* head);
+
+            // normal 
+            std::vector<std::vector<int>> threeSum(std::vector<int>& nums);
+
+            // normal
+            std::vector<int> preorderTraversal(TreeNode* root);
+
+            void preTraversal(TreeNode* root, std::vector<int>& data);
 };
 #endif

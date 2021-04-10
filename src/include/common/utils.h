@@ -12,6 +12,20 @@
   };
 
 
+/**
+ * Definition for a binary tree node.
+ */
+
+struct TreeNode {
+      int val;
+      TreeNode *left;
+      TreeNode *right;
+      TreeNode() : val(0), left(nullptr), right(nullptr) {}
+      TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+      TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ };
+
+
 //---------------------------------------------------------------------------
 //Design your implementation of the linked list. You can choose to use a singly or doubly linked list.
 //A node in a singly linked list should have two attributes: val and next. val is the value of the current node, and next is a pointer/reference to the next node.

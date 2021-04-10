@@ -94,3 +94,34 @@ ListNode* Solution::removeElements(ListNode* head, int val)
     dummy_head = nullptr;
     return ret;
 }
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+/*234. Palindrome Linked List*/
+
+//------------------------------------------------------------------------------------------
+
+// Given the head of a singly linked list, return true if it is a palindrome.
+
+//------------------------------------------------------------------------------------------
+
+bool Solution::isPalindrome(ListNode* head)
+{
+    std::vector<int> vals;
+    // assignment for vals from ListNode.
+    ListNode* tmp_node = head;
+    while(tmp_node)
+    {
+        vals.emplace_back(tmp_node->val);
+        tmp_node = tmp_node->next;
+    }
+    // check the vals.
+    for(size_t i = 0, j = vals.size() - 1; i < j; i++, j--)
+    {
+        if(vals[j] != vals[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}

@@ -102,3 +102,33 @@ void Solution::postTraversal(TreeNode* root, std::vector<int>& data)
         data.emplace_back(root->val);
     }
 }
+
+/* 102. Binary Tree Level Order Traversal */
+
+// Given the root of a binary tree, 
+// return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+std::vector<std::vector<int>> Solution::levelOrder(TreeNode* root)
+{
+    std::vector<std::vector<int> > ret;
+    if(!root)
+    {
+        return ret;
+    }
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        std::size_t currentLevelSize = q.size();
+        ret.push_back(std::vector<int>());
+        for(std::size_t i = 0; i < currentLevelSize; i++)
+        {
+            TreeNode* node = q.front();
+            q.pop();
+            ret.back().push_back(node->val);
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right);
+        }
+    }
+    return ret;
+}

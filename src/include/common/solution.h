@@ -3,6 +3,7 @@
 #include "common/utils.h"
 #include <unordered_set>
 #include <math.h>
+#include <queue>
 class Solution
 {
     public:
@@ -60,5 +61,8 @@ class Solution
             std::vector<int> postorderTraversal(TreeNode* root);
 
             void postTraversal(TreeNode* root, std::vector<int>& data);
+
+            //normal
+            std::vector<std::vector<int>> levelOrder(TreeNode* root);
 };
 #endif

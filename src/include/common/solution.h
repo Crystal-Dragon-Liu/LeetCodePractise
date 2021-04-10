@@ -50,5 +50,15 @@ class Solution
             std::vector<int> preorderTraversal(TreeNode* root);
 
             void preTraversal(TreeNode* root, std::vector<int>& data);
+
+            // normal
+            std::vector<int> inorderTraversal(TreeNode* root);
+            
+            void inTraversal(TreeNode* root, std::vector<int>& data);
+
+            //normal
+            std::vector<int> postorderTraversal(TreeNode* root);
+
+            void postTraversal(TreeNode* root, std::vector<int>& data);
 };
 #endif

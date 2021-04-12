@@ -57,12 +57,15 @@ class Solution
             
             void inTraversal(TreeNode* root, std::vector<int>& data);
 
-            //normal
+            // normal
             std::vector<int> postorderTraversal(TreeNode* root);
 
             void postTraversal(TreeNode* root, std::vector<int>& data);
 
-            //normal
+            // normal
             std::vector<std::vector<int>> levelOrder(TreeNode* root);
+
+            // easy
+            int maxDepth(TreeNode* root);
 };
 #endif

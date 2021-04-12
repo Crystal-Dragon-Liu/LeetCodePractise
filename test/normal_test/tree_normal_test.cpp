@@ -86,7 +86,7 @@ TEST(TreeNormalTest, DISABLED_Test3)
     delete root_right_node;
 }
 
-TEST(TreeNormalTest, Test4)
+TEST(TreeNormalTest, DISABLED_Test4)
 {
     //initialize a TreeNode List.
     TreeNode* root = new TreeNode(3, nullptr, nullptr);

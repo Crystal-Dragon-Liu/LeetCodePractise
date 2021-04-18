@@ -67,5 +67,10 @@ class Solution
 
             // easy
             int maxDepth(TreeNode* root);
+
+            // easy
+            bool isSymmetric(TreeNode* root);
+
+            bool check(TreeNode* p, TreeNode* q);
 };
 #endif

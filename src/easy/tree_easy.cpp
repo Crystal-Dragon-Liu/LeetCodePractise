@@ -16,3 +16,21 @@ int Solution::maxDepth(TreeNode* root)
     return std::max(left_max, right_max) + 1;
 }
 
+
+/*101. Symmetric Tree*/
+/*
+** @brief  Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+*/
+
+bool Solution::isSymmetric(TreeNode* root)
+{
+    return check(root, root);
+}
+
+bool Solution::check(TreeNode* p, TreeNode* q)
+{
+    if(!p && !q) return true;
+    if(!p || !q) return false; // one node is set to null,but not for the other side.
+    return (p->val == q->val) && check(q->right, p->left) && check(p->right, q->left);
+}
+

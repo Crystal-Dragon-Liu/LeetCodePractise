@@ -72,5 +72,8 @@ class Solution
             bool isSymmetric(TreeNode* root);
 
             bool check(TreeNode* p, TreeNode* q);
+
+            // easy
+            bool hasPathSum(TreeNode* root, int targetSum);
 };
 #endif

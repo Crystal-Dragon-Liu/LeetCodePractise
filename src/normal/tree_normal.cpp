@@ -132,3 +132,50 @@ std::vector<std::vector<int>> Solution::levelOrder(TreeNode* root)
     }
     return ret;
 }
+
+/*106. Construct Binary Tree from Inorder and Postorder Traversal*/
+/*
+** @brief Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree 
+**   and postorder is the postorder traversal of the same tree, construct and return the binary tree.
+*/
+
+TreeNode* Solution::buildTree(std::vector<int>& inorder, std::vector<int>& postorder)
+{
+    post_index = static_cast<int>(postorder.size()) - 1;
+    int idx = 0;
+    for(auto& val: inorder){idx_map[val] = idx++;}
+    return helper(0, post_index, inorder, postorder);
+}
+
+TreeNode* Solution::helper(int start, int end, std::vector<int>& inorder, std::vector<int>& postorder)
+{
+    if(start > end) {return nullptr;}
+    int root_val = postorder[post_index];
+    TreeNode* root = new TreeNode(root_val);
+    int index = idx_map[root_val];
+    post_index--;
+    root->right = helper(index + 1, end, inorder, postorder);
+    root->left = helper(start, index - 1, inorder, postorder); // ? why the right part should be built firstly.
+    return root;
+}
+
+
+TreeNode*  Solution::buildTreePreorderAndInorder(std::vector<int>& inorder, std::vector<int>& preorder)
+{
+    int idx = 0;
+    int n   = preorder.size();
+    for(auto& val: inorder){idx_map[val] = idx++;}
+    return helperv2(preorder, inorder, 0, n-1, 0, n-1);
+}
+TreeNode*  Solution::helperv2(const std::vector<int>& preorder, const std::vector<int>& inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right)
+{
+    if(preorder_left > preorder_right) return nullptr;
+    int preorder_root       = preorder_left;
+    int inorder_root        = idx_map[preorder[preorder_root]];
+    // create the root node.
+    TreeNode* root          = new TreeNode(preorder[preorder_root]);
+    int size_left_subtree   = inorder_root  - inorder_left; // 前序遍历位置确定需要额外的信息 inorder_left. inorder_right可能不需要。
+    root->left              = helperv2(preorder, inorder, preorder_left + 1, preorder_left + size_left_subtree,  inorder_left, inorder_root -1);
+    root->right             = helperv2(preorder, inorder, preorder_left + size_left_subtree + 1, preorder_right, inorder_root + 1, inorder_right);
+    return root;
+}

@@ -82,6 +82,10 @@ class Solution
             TreeNode*                       helper(int in_left, int in_right, std::vector<int>& in_order, std::vector<int>& post_order);
             TreeNode*                       buildTreePreorderAndInorder(std::vector<int>& inorder, std::vector<int>& postorder);
             TreeNode*                       helperv2(const std::vector<int>& preorder, const std::vector<int>& inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right);
+            // normal
+            LabFor116::Node*                connect(LabFor116::Node* root);
+            // normal                                  
+            LabFor116::Node*                connect_v2(LabFor116::Node* root);
 
     private:
             int                             post_index;

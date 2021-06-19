@@ -179,3 +179,80 @@ TreeNode*  Solution::helperv2(const std::vector<int>& preorder, const std::vecto
     root->right             = helperv2(preorder, inorder, preorder_left + size_left_subtree + 1, preorder_right, inorder_root + 1, inorder_right);
     return root;
 }
+
+//============== 116. Populating Next Right Pointers in Each Node ========================
+// You are given a perfect binary tree where all leaves are on the same level, 
+// and every parent has two children.
+// The binary tree has the following definition:
+// struct Node {
+//   int val;
+//   Node *left;
+//   Node *right;
+//   Node *next;
+// }
+//=========================================================================================
+
+LabFor116::Node*  Solution::connect(LabFor116::Node* root)
+{
+    if(!root) return nullptr;
+    std::queue<LabFor116::Node*> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        std::size_t size = q.size(); /// pop all the element to make sure that we could get all the nodes in same layer
+        for(std::size_t i = 0; i < size; i++) /// record the size to make sure that we only tranverse one layer.
+        {
+            LabFor116::Node* node = q.front();
+            q.pop();
+            // connect.
+            /// if the node is not the last one.
+            if(i < size - 1) node->next = q.front(); 
+            /// we could record nodes which belong to next layer without worry
+            /// because in this loop, there is a restriction from the size we declared.
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right); 
+        }
+    }
+    return root;
+}
+
+
+//============== 117. Populating Next Right Pointers in Each Node II ======================
+// Given a binary tree
+//
+// struct Node {
+//   int val;
+//   Node *left;
+//   Node *right;
+//   Node *next;
+// }
+// Populate each next pointer to point to its next right node.
+// If there is no next right node, the next pointer should be set to NULL.
+// Initially, all next pointers are set to NULL.
+//=========================================================================================
+
+LabFor116::Node*            Solution::connect_v2(LabFor116::Node* root)
+{
+    
+    if(!root) return nullptr;
+    std::queue<LabFor116::Node*> q;
+    q.push(root);
+    while(!q.empty())
+    {
+            std::size_t size = q.size();
+            LabFor116::Node *last = nullptr;
+            for(std::size_t i = 0; i < size; i++)
+            {
+            LabFor116::Node* node = q.front();
+            q.pop();
+            /// expend elements on next layer.
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right);
+            /// connect start
+            if(i != 0) last->next = node;
+            last = node;
+            /// connect
+            }
+    }
+    return root;
+}

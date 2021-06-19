@@ -26,6 +26,30 @@ struct TreeNode {
  };
 
 
+namespace LabFor116
+{
+     /**
+    * Redefinition of class Node.
+    */
+    class Node {
+public:
+    int val;
+    Node* left;
+    Node* right;
+    Node* next;
+
+    Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+
+    Node(int _val, Node* _left, Node* _right, Node* _next)
+        : val(_val), left(_left), right(_right), next(_next) {}
+    };
+}
+
+
+
+
 //---------------------------------------------------------------------------
 //Design your implementation of the linked list. You can choose to use a singly or doubly linked list.
 //A node in a singly linked list should have two attributes: val and next. val is the value of the current node, and next is a pointer/reference to the next node.

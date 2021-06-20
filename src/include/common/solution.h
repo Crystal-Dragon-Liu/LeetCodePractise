@@ -79,6 +79,13 @@ class Solution
             // normal
             int                             numTrees(int n);
 
+            // easy
+            int                             minDepth(TreeNode* root);
+            // easy
+            bool                            isBalanced(TreeNode* root);
+            int                             height(TreeNode* root);
+            
+
 
     private:
             int                             post_index;

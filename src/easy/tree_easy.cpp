@@ -1,6 +1,7 @@
 #include "common/solution.h"
 #include "common/utils.h"
-
+#include <math.h>
+#include <algorithm>
 
 /*104. Maximum Depth of Binary Tree*/
 /* 
@@ -96,4 +97,49 @@ bool       Solution::isSameTree(TreeNode* p, TreeNode* q)
     {
         return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
     }
+}
+
+//===================      111. Minimum Depth of Binary Tre    ============================
+// Given a binary tree, find its minimum depth.
+// The minimum depth is the number of nodes along the shortest path 
+// from the root node down to the nearest leaf node.
+// Note: A leaf is a node with no children.
+//=========================================================================================
+int                             Solution::minDepth(TreeNode* root)
+{
+    if(!root) return 0;
+    std::queue<std::pair<TreeNode*, int> > que;
+    que.emplace(root, 1);
+    while (!que.empty())
+    {
+        // traverse
+        TreeNode* node = que.front().first;
+        int depth = que.front().second;
+        que.pop();
+        if(!node->left && !node->right){ return depth;}
+        if(node->left) que.emplace(node->left, depth+1);
+        if(node->right) que.emplace(node->right, depth+1);
+    }
+    return 0;
+}
+
+//===================      111. Minimum Depth of Binary Tre    ============================
+// Given a binary tree, determine if it is height-balanced.
+// For this problem, a height-balanced binary tree is defined as:
+// a binary tree in which the left 
+// and right subtrees of every node differ in height by no more than 1.
+//=========================================================================================
+bool                            Solution::isBalanced(TreeNode* root)
+{
+    if(root == NULL) return true;
+    else{
+        return abs(height(root->right) - height(root->left)) <= 1 && isBalanced(root->left) == isBalanced(root->right);
+    }
+}
+
+int                             Solution::height(TreeNode* root)
+{
+    if(!root) return 0;
+    else return std::max(height(root->left), height(root->right)) + 1;
+
 }

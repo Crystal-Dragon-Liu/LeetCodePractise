@@ -73,6 +73,12 @@ class Solution
             int                             parseInt(const std::string& data, int& ptr);
             TreeNode*                       parseSubtree(const std::string& data, int& ptr);
 
+            // easy
+            bool                            isSameTree(TreeNode* p, TreeNode* q);
+
+            // normal
+            int                             numTrees(int n);
+
 
     private:
             int                             post_index;

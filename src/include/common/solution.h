@@ -84,6 +84,14 @@ class Solution
             // easy
             bool                            isBalanced(TreeNode* root);
             int                             height(TreeNode* root);
+            // easy                         
+            TreeNode*                       sortedArrayToBST(std::vector<int>& nums);
+            TreeNode*                       sortedArrayToBSTHelper(std::vector<int> & nums, int left, int right);
+
+            //easy
+            std::vector<std::string>        binaryTreePaths(TreeNode* root);
+            void                            buildPath(TreeNode* root, std::string path, std::vector<std::string>& pathList);
+
             
 
 

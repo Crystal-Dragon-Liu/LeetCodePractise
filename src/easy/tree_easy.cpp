@@ -143,3 +143,52 @@ int                             Solution::height(TreeNode* root)
     else return std::max(height(root->left), height(root->right)) + 1;
 
 }
+
+//=========================================================================================
+// *********108. Convert Sorted Array to Binary Search Tree**************
+// Given an integer array nums where the elements are sorted in ascending order,
+//  convert it to a height-balanced binary search tree.
+// A height-balanced binary tree is a binary tree
+//  in which the depth of the two subtrees of every node never differs by more than one.
+//=========================================================================================
+TreeNode*                       Solution::sortedArrayToBST(std::vector<int>& nums)
+{
+    return sortedArrayToBSTHelper(nums, 0, nums.size()-1);
+}
+
+TreeNode*                       Solution::sortedArrayToBSTHelper(std::vector<int> & nums, int left, int right)
+{
+    if(left > right) return nullptr;
+    int mid = (left + right) / 2;
+    TreeNode* root = new TreeNode(nums[mid]);
+    root->left = sortedArrayToBSTHelper(nums, left, mid -1);
+    root->right = sortedArrayToBSTHelper(nums, mid+1, right);
+    return root;
+}
+//=========================================================================================
+// 257. Binary Tree Paths
+// Given the root of a binary tree,
+// return all root-to-leaf paths in any order.
+// A leaf is a node with no children.
+//=========================================================================================
+std::vector<std::string>        Solution::binaryTreePaths(TreeNode* root)
+{
+    std::vector<std::string> paths;
+    buildPath(root, "", paths);
+    return paths;
+} 
+
+void   Solution::buildPath(TreeNode* root, std::string path, std::vector<std::string>& pathList)
+{
+    if(root)
+    {
+        path += std::to_string(root->val);
+        if(!root->left && !root->right) pathList.push_back(path);
+        else
+        {
+            path += "->";
+            buildPath(root->left, path, pathList);
+            buildPath(root->right, path, pathList);
+        }
+    } 
+}

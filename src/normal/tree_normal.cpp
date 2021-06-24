@@ -1,5 +1,6 @@
 #include "common/solution.h"
 #include "common/utils.h"
+#include <algorithm>
 
 
 /* 144. Binary Tree Preorder Traversal */
@@ -365,4 +366,58 @@ void Solution::searchTreeAndRecover(TreeNode* node, int& count, int x, int y)
         searchTreeAndRecover(node->left, count, x, y);
         searchTreeAndRecover(node->right, count, x, y);
     }
+}
+
+//=========================================================================================
+// ?98. Validate Binary Search Tree
+// Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+// A valid BST is defined as follows:
+// The left subtree of a node contains only nodes with keys less than the node's key.
+// The right subtree of a node contains only nodes with keys greater than the node's key.
+// Both the left and right subtrees must also be binary search trees.
+//=========================================================================================
+
+bool Solution::isValidBST(TreeNode* root)
+{
+    return isValidBSTHelper(root, -99999, 99999);
+}
+
+bool Solution::isValidBSTHelper(TreeNode* root, long long left, long long right)
+{
+    if(root == nullptr) return true;
+    if(root->val <= left || root->val >= right)
+        return false;
+    return isValidBSTHelper(root->left, left, root->val) && isValidBSTHelper(root->right, root->val, right);
+    
+}
+
+//=========================================================================================
+// ? 107. Binary Tree Level Order Traversal II
+// Given the root of a binary tree, 
+// return the bottom-up level order traversal of its nodes' values. 
+// (i.e., from left to right, level by level from leaf to root).
+//=========================================================================================
+
+std::vector<std::vector<int> >  Solution::levelOrderBottom(TreeNode* root)
+{
+    std::vector<std::vector< int > > levelOrder;
+    if(!root) return levelOrder;
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        auto level = std::vector<int>();
+        int size = q.size();
+        for(int i = 0; i < size; i++)
+        {
+            TreeNode* node = q.front();
+            q.pop();
+            level.push_back(node->val);
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right);
+        }
+        levelOrder.push_back(level);
+    }
+    std::reverse(levelOrder.begin(), levelOrder.end());
+    return levelOrder;
 }

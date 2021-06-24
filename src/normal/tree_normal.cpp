@@ -270,3 +270,99 @@ int    Solution::numTrees(int n)
     for(int i = 2; i <= n; i++){for(int j = 1; j <= i; j++){G[i] += G[j - 1] * G[i - j];}}
     return G[n];
 }
+
+//=========================================================================================
+// ? 95. Unique Binary Search Trees II
+// Given an integer n, 
+// return all the structurally unique BST's (binary search trees), 
+// which has exactly n nodes of unique values from 1 to n. 
+// Return the answer in any order.
+//=========================================================================================
+
+std::vector<TreeNode*>  Solution::generateTrees(int n)
+{
+    if(!n) return {};
+    return generateTrees(1, n);
+}
+
+std::vector<TreeNode*>  Solution::generateTrees(int start, int end)
+{
+    if(start > end) return std::vector<TreeNode*>{nullptr};
+    std::vector<TreeNode*> allTree;
+    for(int i = start; i <= end; i++)
+    {
+        std::vector<TreeNode*> leftTrees = generateTrees(start, i - 1);
+        std::vector<TreeNode*> rightTrees = generateTrees(i+1, end);
+        for( auto leftTree: leftTrees)
+            for(auto rightTree: rightTrees)
+            {
+                TreeNode* curNode = new TreeNode(i);
+                curNode->left = leftTree;
+                curNode->right = rightTree;
+                allTree.emplace_back(curNode);
+            }
+    }
+    return allTree;
+}
+
+
+//=========================================================================================
+// ? 99. Recover Binary Search Tree
+// You are given the root of a binary search tree (BST),
+//  where exactly two nodes of the tree were swapped by mistake. 
+//  Recover the tree without changing its structure.
+
+// Follow up: A solution using O(n) space is pretty straight forward. 
+// Could you devise a constant space solution?
+//=========================================================================================
+void            Solution::recoverTrees(TreeNode* node)
+{
+    // get a inorder vector that stands for the tree's value.
+    std::vector<int> num;
+    getInorderVec(node, num);
+    // get the pair that contains the two node which need to be swapped.
+    std::pair<int, int> x_y = getTwoSwappedNodes(num);
+    int count = 2;
+    searchTreeAndRecover(node, count, x_y.first, x_y.second);
+}
+
+void            Solution::getInorderVec(TreeNode* node, std::vector<int>& num)
+{
+    if(!node) return;
+    getInorderVec(node->left, num);
+    num.push_back(node->val);
+    getInorderVec(node->right, num);
+}
+
+
+
+std::pair<int, int>  Solution::getTwoSwappedNodes(const std::vector<int>& nums)
+{
+        int n = nums.size();
+        int x = -1, y = -1;
+        for(int i = 0; i < n - 1; ++i) {
+            if (nums[i + 1] < nums[i]) {
+                y = nums[i + 1];
+                if (x == -1) {
+                    x = nums[i];
+                }
+                else break;
+            }
+        }
+        return {x, y};
+}     
+
+void Solution::searchTreeAndRecover(TreeNode* node, int& count, int x, int y)
+{
+    if(node)
+    {
+        if(node->val == x || node->val == y)
+        {
+            node->val = node->val == x ? y : x;
+            if(--count == 0){return;}
+            //?  make sure that we only swap val for 2 times.??
+        }
+        searchTreeAndRecover(node->left, count, x, y);
+        searchTreeAndRecover(node->right, count, x, y);
+    }
+}

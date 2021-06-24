@@ -92,9 +92,15 @@ class Solution
             std::vector<std::string>        binaryTreePaths(TreeNode* root);
             void                            buildPath(TreeNode* root, std::string path, std::vector<std::string>& pathList);
 
-            
+            // normal
+            std::vector<TreeNode*>          generateTrees(int n);
+            std::vector<TreeNode*>          generateTrees(int start, int end);
 
-
+            // normal
+            void                            recoverTrees(TreeNode*);
+            void                            getInorderVec(TreeNode*, std::vector<int>& num);
+            std::pair<int, int>             getTwoSwappedNodes(const std::vector<int>& num);         
+            void                            searchTreeAndRecover(TreeNode*, int&, int, int);
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;

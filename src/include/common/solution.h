@@ -72,13 +72,10 @@ class Solution
             TreeNode*                       parse(const std::string& data, int& ptr);
             int                             parseInt(const std::string& data, int& ptr);
             TreeNode*                       parseSubtree(const std::string& data, int& ptr);
-
             // easy 100. Same Tree 
             bool                            isSameTree(TreeNode* p, TreeNode* q);
-
             // normal 96. Unique Binary Search Trees
             int                             numTrees(int n);
-
             // easy 111. Minimum Depth of Binary Tre
             int                             minDepth(TreeNode* root);
             // easy 111. is balanced.
@@ -87,27 +84,33 @@ class Solution
             // easy 108. Convert Sorted Array to Binary Search Tree
             TreeNode*                       sortedArrayToBST(std::vector<int>& nums);
             TreeNode*                       sortedArrayToBSTHelper(std::vector<int> & nums, int left, int right);
-
             //easy 257. Binary Tree Paths
             std::vector<std::string>        binaryTreePaths(TreeNode* root);
             void                            buildPath(TreeNode* root, std::string path, std::vector<std::string>& pathList);
-
             // normal 95. Unique Binary Search Trees II
             std::vector<TreeNode*>          generateTrees(int n);
             std::vector<TreeNode*>          generateTrees(int start, int end);
-
             // normal 99. Recover Binary Search Tree
             void                            recoverTrees(TreeNode*);
             void                            getInorderVec(TreeNode*, std::vector<int>& num);
             std::pair<int, int>             getTwoSwappedNodes(const std::vector<int>& num);         
             void                            searchTreeAndRecover(TreeNode*, int&, int, int);
-
             // normal 98. Validate Binary Search Tree
             bool                            isValidBST(TreeNode* root);
             bool                            isValidBSTHelper(TreeNode*, long long left, long long right);
-
             // normal 107. Binary Tree Level Order Traversal II
             std::vector<std::vector<int> >  levelOrderBottom(TreeNode* root);
+            // normal 109. Convert Sorted List to Binary Search Tree
+            TreeNode*                       sortedListToBST(ListNode* head);
+            TreeNode*                       sortedListToBSTHelpler(ListNode* leftNode, ListNode* rightNode);
+            ListNode*                       findMedianNode(ListNode* left, ListNode* right);
+            // normal 113. Path Sum II
+            std::vector<std::vector<int>>   pathSum(TreeNode* root, int targetSum);
+            void                            dfsPathSum(TreeNode* root, int targetSum);
+            // normal 114. Flatten Binary Tree to Linked List
+            void                            flatten(TreeNode* root);
+            void                            preOrderTraversal(TreeNode* root, std::vector<TreeNode*>& treeNodeVec);
+
 
 
 
@@ -116,5 +119,9 @@ class Solution
             std::unordered_map<int, int>    idx_map;
     public:
             TreeNode*                       ans;
+
+            // 113. Path Sum II
+            std::vector<std::vector<int> > _path_set;
+            std::vector<int>               _path;
 };
 #endif

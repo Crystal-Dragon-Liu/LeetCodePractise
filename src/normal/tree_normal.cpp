@@ -421,3 +421,101 @@ std::vector<std::vector<int> >  Solution::levelOrderBottom(TreeNode* root)
     std::reverse(levelOrder.begin(), levelOrder.end());
     return levelOrder;
 }
+
+//=========================================================================================
+// ? 109. Convert Sorted List to Binary Search Tree
+// Given the head of a singly linked list where elements are sorted in ascending order,
+//  convert it to a height balanced BST.
+// For this problem, 
+// a height-balanced binary tree is defined as a binary tree
+//  in which the depth of the two subtrees of every node never differ by more than 1.
+//=========================================================================================
+
+TreeNode*          Solution::sortedListToBST(ListNode* head)
+{
+    return sortedListToBSTHelpler(head, nullptr);
+}
+
+TreeNode*       Solution::sortedListToBSTHelpler(ListNode* leftNode, ListNode* rightNode)
+{
+    if(leftNode == rightNode) return nullptr;
+    ListNode* node = findMedianNode(leftNode, rightNode);
+    // build left sub-tree.
+    TreeNode* rootNode = new TreeNode(node->val);
+    rootNode->left = sortedListToBSTHelpler(leftNode, node);
+    rootNode->right = sortedListToBSTHelpler(node->next, rightNode);
+    return rootNode;
+    // build right sub-tree.
+}
+ListNode*       Solution::findMedianNode(ListNode* left, ListNode* right)
+{
+    ListNode* fasterNode = left;
+    ListNode* slowerNode = left;
+    while(fasterNode != right && fasterNode->next != right)
+    {
+        fasterNode = fasterNode->next;
+        fasterNode = fasterNode->next;
+        slowerNode = slowerNode->next;
+    }
+    return slowerNode;
+}
+
+
+
+//=========================================================================================
+// ? 113. Path Sum II
+// Given the root of a binary tree and an integer targetSum, 
+// return all root-to-leaf paths where each path's sum equals targetSum.
+// A leaf is a node with no children.
+//=========================================================================================
+std::vector<std::vector<int>>   Solution::pathSum(TreeNode* root, int targetSum)
+{
+    dfsPathSum(root, targetSum);
+    return _path_set;
+}
+// huisu
+void                     Solution::dfsPathSum(TreeNode* root, int targetSum)
+{
+    if(!root) return;
+    _path.push_back(root->val);
+    targetSum -= root->val;
+    if(!root->left && !root->right && targetSum == 0) // if the node is leaf node and there is a path in which each node ' value is the sum
+    {
+        _path_set.emplace_back(_path);
+    }
+    dfsPathSum(root->left, targetSum);
+    dfsPathSum(root->right, targetSum);
+    _path.pop_back(); // means that after the end of call of this method, path should be reset.
+}
+
+//=========================================================================================
+// ? 114. Flatten Binary Tree to Linked List
+// Given the root of a binary tree, flatten the tree into a "linked list":
+// The "linked list" should use the same TreeNode class 
+// where the right child pointer points to the next node in the list and the left child pointer
+//  is always null.The "linked list" should be in the same order as a pre-order traversal of 
+//  the binary tree.
+//=========================================================================================
+void                      Solution::flatten(TreeNode* root)
+{
+    std::vector<TreeNode*> treeNodeVec;
+    preOrderTraversal(root, treeNodeVec);
+    // TODO process  the treeNodeVec later.
+    int n = treeNodeVec.size();
+    for(int i = 1; i < n; i++)
+    {
+        TreeNode* cur_node = treeNodeVec.at(i - 1);
+        TreeNode* next_node = treeNodeVec.at(i);
+        cur_node->right = next_node;
+        cur_node->left  = nullptr;
+    }
+}
+
+void        Solution::preOrderTraversal(TreeNode* root, std::vector<TreeNode*>& treeNodeVec)
+{
+    if(!root) return;
+    treeNodeVec.push_back(root);
+    preOrderTraversal(root->left, treeNodeVec);
+    preOrderTraversal(root->right, treeNodeVec);
+}
+

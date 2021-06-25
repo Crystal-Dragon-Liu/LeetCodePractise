@@ -111,6 +111,10 @@ class Solution
             void                            flatten(TreeNode* root);
             void                            preOrderTraversal(TreeNode* root, std::vector<TreeNode*>& treeNodeVec);
 
+            // normal 129. Sum Root to Leaf Numbers
+            int                             sumNumbers(TreeNode* root);
+            void                            sumNumbersHelper(TreeNode* root);
+            int                             calcBit(int num);
 
 
 
@@ -123,5 +127,8 @@ class Solution
             // 113. Path Sum II
             std::vector<std::vector<int> > _path_set;
             std::vector<int>               _path;
+            // 129. path sum
+            std::vector<int>               _sumPathSet;
+            int                            _sumPath;
 };
 #endif

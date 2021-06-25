@@ -123,3 +123,18 @@ TEST(TreeNormalTest, DISABLED_Test4)
     delete root_right_right_node;
     delete root_right_left_node;
 }
+
+TEST(TreeNormalTest, Test5)
+{
+    TreeNode* root_right = new TreeNode(3, nullptr, nullptr);
+    TreeNode* root = new TreeNode(1, nullptr, nullptr);
+    TreeNode* root_left = new TreeNode(2, nullptr, nullptr);
+    root->left = root_left;
+    root->right = root_right;
+    Solution solu;
+    int result = solu.sumNumbers(root);
+    std::cout << result << std::endl;
+    delete root->left;
+    delete root->right;
+    delete root;
+}

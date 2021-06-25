@@ -519,3 +519,49 @@ void        Solution::preOrderTraversal(TreeNode* root, std::vector<TreeNode*>& 
     preOrderTraversal(root->right, treeNodeVec);
 }
 
+//=========================================================================================
+// ? 129. Sum Root to Leaf Numbers
+// You are given the root of a binary tree containing digits from 0 to 9 only.
+// Each root-to-leaf path in the tree represents a number.
+// For example, the root-to-leaf path 1 -> 2 -> 3 represents the number 123.
+// Return the total sum of all root-to-leaf numbers. 
+// Test cases are generated so that the answer will fit in a 32-bit integer.
+// A leaf node is a node with no children.
+//=========================================================================================
+int        Solution::sumNumbers(TreeNode* root)
+{
+    _sumPath = 0;
+    sumNumbersHelper(root);
+    int result = 0;
+    for(std::size_t i = 0; i < _sumPathSet.size(); i++){result += _sumPathSet[i];}
+    return result;  
+}
+
+void       Solution::sumNumbersHelper(TreeNode* root)
+{
+    if(!root) return;
+    // _sumPath += root->val;
+    //TODO update the sum.
+    // _sumPath += (root->val * pow(10, cnt));
+    _sumPath = _sumPath* 10 + root->val;
+    std::cout << _sumPath << std::endl;
+
+
+    if(!root->left && !root->right){_sumPathSet.push_back(_sumPath);}
+    sumNumbersHelper(root->left);
+    sumNumbersHelper(root->right);
+    //TODO reset the sum.
+    _sumPath = (_sumPath - root->val) / 10;
+    std::cout << _sumPath << std::endl;
+}
+int      Solution::calcBit(int num)
+{
+    int cnt = 0;
+    while(num/10 != 0)
+    {
+        num = num/10;
+        cnt++;
+    }
+    cnt += 1;
+    return cnt;
+}

@@ -124,7 +124,7 @@ TEST(TreeNormalTest, DISABLED_Test4)
     delete root_right_left_node;
 }
 
-TEST(TreeNormalTest, Test5)
+TEST(TreeNormalTest, DISABLED_Test5)
 {
     TreeNode* root_right = new TreeNode(3, nullptr, nullptr);
     TreeNode* root = new TreeNode(1, nullptr, nullptr);
@@ -137,4 +137,36 @@ TEST(TreeNormalTest, Test5)
     delete root->left;
     delete root->right;
     delete root;
+}
+
+TEST(TreeNormalTest, DISABLED_Test6)
+{
+    TreeNode* node1 = new TreeNode(1, nullptr, nullptr);
+    TreeNode* node2 = new TreeNode(2, nullptr, nullptr);
+    TreeNode* node3 = new TreeNode(3, nullptr, nullptr);
+    TreeNode* node4 = new TreeNode(4, nullptr, nullptr);
+    TreeNode* node5 = new TreeNode(5, nullptr, nullptr);
+
+    node1->left = node2;
+    node1->right = node3;
+    node2->right = node5;
+    node3->right = node4;
+    Solution solu;
+    std::vector<int> result = solu.rightSideView(node1);
+    for(std::size_t i = 0; i < result.size(); i++)
+        std::cout << result[i] << std::endl;
+    delete node1;
+    delete node2;
+    delete node3;
+    delete node4;
+    delete node5;
+
+}
+
+TEST(TreeNormalTest, Test7)
+{
+    std::vector<int> nums{-2,1,-3,4,-1,2,1,-5,4};
+    Solution solu;
+    int result = solu.maxSubArray(nums);
+    std::cout << result << std::endl;
 }

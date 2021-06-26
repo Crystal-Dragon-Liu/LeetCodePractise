@@ -115,8 +115,15 @@ class Solution
             int                             sumNumbers(TreeNode* root);
             void                            sumNumbersHelper(TreeNode* root);
             int                             calcBit(int num);
+            // normal 199. Binary Tree Right Side View
+            std::vector<int>                rightSideView(TreeNode* root);
+            // normal 300. Longest Increasing Subsequence
+            int                             lengthOfLIS(std::vector<int>& nums);
 
-
+            // easy 53. Maximum Subarray
+            int                             maxSubArray(std::vector<int>& nums); 
+            int                             getSubArraySum(std::vector<int> vec);
+            std::string                     getStrVec(std::vector<int>& nums);
 
     private:
             int                             post_index;

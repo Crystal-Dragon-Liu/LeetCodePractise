@@ -1,7 +1,7 @@
 #include "common/solution.h"
 #include "common/utils.h"
 #include <algorithm>
-
+#include <math.h>
 
 /* 144. Binary Tree Preorder Traversal */
 // Given the root of a binary tree, return the preorder traversal of its nodes' values.
@@ -565,3 +565,99 @@ int      Solution::calcBit(int num)
     cnt += 1;
     return cnt;
 }
+
+//=========================================================================================
+// ? 199. Binary Tree Right Side View
+//Given the root of a binary tree, 
+// imagine yourself standing on the right side of it, 
+//return the values of the nodes you can see ordered from top to bottom.
+//=========================================================================================
+std::vector<int> Solution::rightSideView(TreeNode* root)
+{
+    std::vector<int> ret;
+    std::vector<int> result;
+    if(!root) return result;
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        int size = q.size();
+        for(int i = 0; i < size; i++)
+        {
+            TreeNode* node = q.front();
+            q.pop();
+            ret.push_back(node->val);
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right);
+        }
+        result.push_back(ret.back());
+        ret.clear();
+    }
+    return result;
+}
+
+//=========================================================================================
+// ? 300. Longest Increasing Subsequence
+// Given an integer array nums,
+// return the length of the longest strictly increasing subsequence.
+// A subsequence is a sequence that can be derived from an array by deleting some or no elements
+// without changing the order of the remaining elements.
+// For example, [3,6,2,7] is a subsequence of the array [0,3,1,6,2,2,7].
+//=========================================================================================
+
+int    Solution::lengthOfLIS(std::vector<int>& nums)
+{
+    std::vector<int> dp(nums.size(), 1);
+    for(std::size_t i = 0; i < nums.size(); i++)
+    {
+        for(std::size_t j = 0; j < i; j++)
+        {
+            if(nums[j] < nums[i])
+            {
+                dp[i] = std::max(dp[i], dp[j]+1);
+            }
+        }
+    }
+    return *(std::max_element(dp.begin(), dp.end()));
+}
+//=========================================================================================
+// ? 53. Maximum Subarray
+// Given an integer array nums, 
+// find the contiguous subarray (containing at least one number) 
+// which has the largest sum and return its sum.
+// e.g. nums = [-2,1,-3,4,-1,2,1,-5,4]
+//=========================================================================================
+
+int Solution::maxSubArray(std::vector<int>& nums)
+{
+    std::vector<int> f(nums.size(), 0);
+    for(std::size_t i = 0; i < nums.size(); i++)
+    {
+        int left = nums[i];
+        int right = i!= 0 ? f[i-1] + nums[i]: nums[i];
+        f[i] = std::max(right, left);
+    }
+    return *(std::max_element(f.begin(), f.end()));
+    
+}
+
+int  Solution::getSubArraySum(std::vector<int> vec)
+{
+    int result = 0;
+    for(std::size_t i = 0; i < vec.size(); i++)
+        result += vec[i];
+    return result;
+}
+
+std::string   Solution::getStrVec(std::vector<int>& nums)
+{
+    std::string result("");
+    for(std::size_t i = 0; i < nums.size(); i++)
+    {
+        result += std::to_string(nums[i]);
+        result += " ";
+    }
+    return result;
+}
+
+

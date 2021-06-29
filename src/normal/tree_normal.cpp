@@ -659,5 +659,68 @@ std::string   Solution::getStrVec(std::vector<int>& nums)
     }
     return result;
 }
+//=========================================================================================
+// ? 5. Longest Palindromic Substrings
+// Given a string s, return the longest palindromic substring in s.
 
+// Example 1:
 
+// Input: s = "babad"
+// Output: "bab"
+// Note: "aba" is also a valid answer.
+// Example 2:
+
+// Input: s = "cbbd"
+// Output: "bb"
+// Example 3:
+
+// Input: s = "a"
+// Output: "a"
+// Example 4:
+
+// Input: s = "ac"
+// Output: "a"
+//=========================================================================================
+
+std::string     Solution::longestPalindrome(std::string s)
+{
+    if(s.size() <2) return s; 
+    std::vector<std::vector<bool> > dp(s.size(), std::vector<bool>(s.size(), true));
+    // when i > j dp[i][j] == false;
+    // when s[i] == s[j] && dp[i+1][j-1] == true, dp[i][j] == true.
+    for(std::size_t i = 0; i < dp.size(); i++)
+        dp[i][i] = true;
+    int n = dp.size();
+    int max = 1;
+    std::string lpd;
+    int begin = 0;
+    // traverse the 
+    for(int L = 2; L <= n; L++)
+    {
+        for(int i = 0; i < n; i++)
+        {
+            // traverse the array
+            //[0 1] [1 2] [2 3] [3 4]...
+            // [0 1 2] [1 2 3] ... 
+            // [0 1 2 3] [1 2 3 4] ...
+            int j = L -1 + i;
+            if(j >= n) break;
+            if(s[i] != s[j]) dp[i][j] = false;
+            else{
+                if(j - i < 3) dp[i][j] = true;
+                else
+                {
+                    dp[i][j] = dp[i + 1][j - 1];
+                }
+            }
+            // if dp[i][j] == true, then record its length and compare it with max.
+            if(dp[i][j] && j - i + 1 > max) 
+            {
+                    max = j - i + 1;
+                    begin = i;
+            }
+        }
+    }
+    lpd = s.substr(begin, max);
+    return lpd;
+}

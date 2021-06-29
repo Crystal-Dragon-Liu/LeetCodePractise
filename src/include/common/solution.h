@@ -9,121 +9,128 @@ class Solution
 {
     public:
             //easy  141. linked list cycle
-            bool                            hasCycle(ListNode* head);
+            bool                                hasCycle(ListNode* head);
             //normal 142.Linked List Cycle 2
-            ListNode*                       detectCycle(ListNode *head);
+            ListNode*                           detectCycle(ListNode *head);
             //easy
-            bool                            containsDuplicate(std::vector<int>& nums);
+            bool                                containsDuplicate(std::vector<int>& nums);
             //easy
-            int                             singleNumber(std::vector<int>& nums);
+            int                                 singleNumber(std::vector<int>& nums);
             //easy
-            std::vector<int>                intersection(std::vector<int>& nums1, std::vector<int>& nums2);
-            std::vector<int>                get_intersection(const std::unordered_set<int>& set1, const std::unordered_set<int>& set2);
+            std::vector<int>                    intersection(std::vector<int>& nums1, std::vector<int>& nums2);
+            std::vector<int>                    get_intersection(const std::unordered_set<int>& set1, const std::unordered_set<int>& set2);
             //easy
-            bool                            isHappy(int n);
-            int                             getNext(int n);
+            bool                                isHappy(int n);
+            int                                 getNext(int n);
             //easy 19
-            ListNode*                       getIntersectionNode(ListNode* headA, ListNode* headB);
+            ListNode*                           getIntersectionNode(ListNode* headA, ListNode* headB);
             //normal
-            ListNode*                       removeNthFromEnd(ListNode* head, int n);
+            ListNode*                           removeNthFromEnd(ListNode* head, int n);
             // easy
-            ListNode*                       reverseList(ListNode* head);
+            ListNode*                           reverseList(ListNode* head);
             // easy
-            ListNode*                       removeElements(ListNode* head, int val);
+            ListNode*                           removeElements(ListNode* head, int val);
             // normal 328. Odd Even Linked List
-            ListNode*                       oddEvenList(ListNode* head);
+            ListNode*                           oddEvenList(ListNode* head);
             // easy 234. Palindrome Linked List
-            bool                            isPalindrome(ListNode* head);
+            bool                                isPalindrome(ListNode* head);
             // normal 15. 3Sum
-            std::vector<std::vector<int>>   threeSum(std::vector<int>& nums);
+            std::vector<std::vector<int>>       threeSum(std::vector<int>& nums);
             // normal 144. Binary Tree Preorder Traversal
-            std::vector<int>                preorderTraversal(TreeNode* root);
-            void                            preTraversal(TreeNode* root, std::vector<int>& data);
+            std::vector<int>                    preorderTraversal(TreeNode* root);
+            void                                preTraversal(TreeNode* root, std::vector<int>& data);
             // normal 94. Binary Tree Inorder Traversal
-            std::vector<int>                inorderTraversal(TreeNode* root);
-            void                            inTraversal(TreeNode* root, std::vector<int>& data);
+            std::vector<int>                    inorderTraversal(TreeNode* root);
+            void                                inTraversal(TreeNode* root, std::vector<int>& data);
             // normal 145. Binary Tree Postorder Traversal
-            std::vector<int>                postorderTraversal(TreeNode* root);
-            void                            postTraversal(TreeNode* root, std::vector<int>& data);
+            std::vector<int>                    postorderTraversal(TreeNode* root);
+            void                                postTraversal(TreeNode* root, std::vector<int>& data);
             // normal 102. Binary Tree Level Order Traversal
-            std::vector<std::vector<int>>   levelOrder(TreeNode* root);
+            std::vector<std::vector<int>>       levelOrder(TreeNode* root);
             // easy 104. Maximum Depth of Binary Tree
-            int                             maxDepth(TreeNode* root);
+            int                                 maxDepth(TreeNode* root);
             // easy 101. Symmetric Tree
-            bool                            isSymmetric(TreeNode* root);
-            bool                            check(TreeNode* p, TreeNode* q);
+            bool                                isSymmetric(TreeNode* root);
+            bool                                check(TreeNode* p, TreeNode* q);
             // easy Given the root of a binary tree and an integer targetSum
-            bool                            hasPathSum(TreeNode* root, int targetSum);
+            bool                                hasPathSum(TreeNode* root, int targetSum);
             // normal 106. Construct Binary Tree from Inorder and Postorder Traversal
-            TreeNode*                       buildTree(std::vector<int>& inorder, std::vector<int>& postorder);
-            TreeNode*                       helper(int in_left, int in_right, std::vector<int>& in_order, std::vector<int>& post_order);
-            TreeNode*                       buildTreePreorderAndInorder(std::vector<int>& inorder, std::vector<int>& postorder);
-            TreeNode*                       helperv2(const std::vector<int>& preorder, const std::vector<int>& inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right);
+            TreeNode*                           buildTree(std::vector<int>& inorder, std::vector<int>& postorder);
+            TreeNode*                           helper(int in_left, int in_right, std::vector<int>& in_order, std::vector<int>& post_order);
+            TreeNode*                           buildTreePreorderAndInorder(std::vector<int>& inorder, std::vector<int>& postorder);
+            TreeNode*                           helperv2(const std::vector<int>& preorder, const std::vector<int>& inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right);
             // normal 116. Populating Next Right Pointers in Each Node
-            LabFor116::Node*                connect(LabFor116::Node* root);
+            LabFor116::Node*                    connect(LabFor116::Node* root);
             // normal 117. Populating Next Right Pointers in Each Node II                                
-            LabFor116::Node*                connect_v2(LabFor116::Node* root);
+            LabFor116::Node*                    connect_v2(LabFor116::Node* root);
             // easy 剑指 Offer 68 - II. 二叉树的最近公共祖先
-            TreeNode*                       lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q);
-            bool                            dfsForLowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q);
+            TreeNode*                           lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q);
+            bool                                dfsForLowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q);
             // hard 297. Serialize and Deserialize Binary Tree
-            std::string                     serialize(TreeNode* root);
-            TreeNode*                       deserialize(std::string data);
-            TreeNode*                       parse(const std::string& data, int& ptr);
-            int                             parseInt(const std::string& data, int& ptr);
-            TreeNode*                       parseSubtree(const std::string& data, int& ptr);
+            std::string                         serialize(TreeNode* root);
+            TreeNode*                           deserialize(std::string data);
+            TreeNode*                           parse(const std::string& data, int& ptr);
+            int                                 parseInt(const std::string& data, int& ptr);
+            TreeNode*                           parseSubtree(const std::string& data, int& ptr);
             // easy 100. Same Tree 
-            bool                            isSameTree(TreeNode* p, TreeNode* q);
+            bool                                isSameTree(TreeNode* p, TreeNode* q);
             // normal 96. Unique Binary Search Trees
-            int                             numTrees(int n);
+            int                                 numTrees(int n);
             // easy 111. Minimum Depth of Binary Tre
-            int                             minDepth(TreeNode* root);
+            int                                 minDepth(TreeNode* root);
             // easy 111. is balanced.
-            bool                            isBalanced(TreeNode* root);
-            int                             height(TreeNode* root);
+            bool                                isBalanced(TreeNode* root);
+            int                                 height(TreeNode* root);
             // easy 108. Convert Sorted Array to Binary Search Tree
-            TreeNode*                       sortedArrayToBST(std::vector<int>& nums);
-            TreeNode*                       sortedArrayToBSTHelper(std::vector<int> & nums, int left, int right);
+            TreeNode*                           sortedArrayToBST(std::vector<int>& nums);
+            TreeNode*                           sortedArrayToBSTHelper(std::vector<int> & nums, int left, int right);
             //easy 257. Binary Tree Paths
-            std::vector<std::string>        binaryTreePaths(TreeNode* root);
-            void                            buildPath(TreeNode* root, std::string path, std::vector<std::string>& pathList);
+            std::vector<std::string>            binaryTreePaths(TreeNode* root);
+            void                                buildPath(TreeNode* root, std::string path, std::vector<std::string>& pathList);
             // normal 95. Unique Binary Search Trees II
-            std::vector<TreeNode*>          generateTrees(int n);
-            std::vector<TreeNode*>          generateTrees(int start, int end);
+            std::vector<TreeNode*>              generateTrees(int n);
+            std::vector<TreeNode*>              generateTrees(int start, int end);
             // normal 99. Recover Binary Search Tree
-            void                            recoverTrees(TreeNode*);
-            void                            getInorderVec(TreeNode*, std::vector<int>& num);
-            std::pair<int, int>             getTwoSwappedNodes(const std::vector<int>& num);         
-            void                            searchTreeAndRecover(TreeNode*, int&, int, int);
+            void                                recoverTrees(TreeNode*);
+            void                                getInorderVec(TreeNode*, std::vector<int>& num);
+            std::pair<int, int>                 getTwoSwappedNodes(const std::vector<int>& num);         
+            void                                searchTreeAndRecover(TreeNode*, int&, int, int);
             // normal 98. Validate Binary Search Tree
-            bool                            isValidBST(TreeNode* root);
-            bool                            isValidBSTHelper(TreeNode*, long long left, long long right);
+            bool                                isValidBST(TreeNode* root);
+            bool                                isValidBSTHelper(TreeNode*, long long left, long long right);
             // normal 107. Binary Tree Level Order Traversal II
-            std::vector<std::vector<int> >  levelOrderBottom(TreeNode* root);
+            std::vector<std::vector<int> >      levelOrderBottom(TreeNode* root);
             // normal 109. Convert Sorted List to Binary Search Tree
-            TreeNode*                       sortedListToBST(ListNode* head);
-            TreeNode*                       sortedListToBSTHelpler(ListNode* leftNode, ListNode* rightNode);
-            ListNode*                       findMedianNode(ListNode* left, ListNode* right);
+            TreeNode*                           sortedListToBST(ListNode* head);
+            TreeNode*                           sortedListToBSTHelpler(ListNode* leftNode, ListNode* rightNode);
+            ListNode*                           findMedianNode(ListNode* left, ListNode* right);
             // normal 113. Path Sum II
-            std::vector<std::vector<int>>   pathSum(TreeNode* root, int targetSum);
-            void                            dfsPathSum(TreeNode* root, int targetSum);
+            std::vector<std::vector<int>>       pathSum(TreeNode* root, int targetSum);
+            void                                dfsPathSum(TreeNode* root, int targetSum);
             // normal 114. Flatten Binary Tree to Linked List
-            void                            flatten(TreeNode* root);
-            void                            preOrderTraversal(TreeNode* root, std::vector<TreeNode*>& treeNodeVec);
+            void                                flatten(TreeNode* root);
+            void                                preOrderTraversal(TreeNode* root, std::vector<TreeNode*>& treeNodeVec);
 
             // normal 129. Sum Root to Leaf Numbers
-            int                             sumNumbers(TreeNode* root);
-            void                            sumNumbersHelper(TreeNode* root);
-            int                             calcBit(int num);
+            int                                 sumNumbers(TreeNode* root);
+            void                                sumNumbersHelper(TreeNode* root);
+            int                                 calcBit(int num);
             // normal 199. Binary Tree Right Side View
-            std::vector<int>                rightSideView(TreeNode* root);
+            std::vector<int>                    rightSideView(TreeNode* root);
             // normal 300. Longest Increasing Subsequence
-            int                             lengthOfLIS(std::vector<int>& nums);
+            int                                 lengthOfLIS(std::vector<int>& nums);
 
             // easy 53. Maximum Subarray
-            int                             maxSubArray(std::vector<int>& nums); 
-            int                             getSubArraySum(std::vector<int> vec);
-            std::string                     getStrVec(std::vector<int>& nums);
+            int                                 maxSubArray(std::vector<int>& nums); 
+            int                                 getSubArraySum(std::vector<int> vec);
+            std::string                         getStrVec(std::vector<int>& nums);
+            // normal 5. Longest Palindromic Substring
+            std::string                         longestPalindrome(std::string s);
+            // easy  509. Fibonacci Number
+            int                                 fib(int n);
+            // easy 70. Climbing Stairs
+            int                                 climbStairs(int n); 
+
 
     private:
             int                             post_index;

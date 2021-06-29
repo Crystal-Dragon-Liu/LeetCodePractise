@@ -163,10 +163,18 @@ TEST(TreeNormalTest, DISABLED_Test6)
 
 }
 
-TEST(TreeNormalTest, Test7)
+TEST(TreeNormalTest, DISABLED_Test7)
 {
     std::vector<int> nums{-2,1,-3,4,-1,2,1,-5,4};
     Solution solu;
     int result = solu.maxSubArray(nums);
+    std::cout << result << std::endl;
+}
+
+TEST(TreeNormalTest, Test8)
+{
+    std::string s("babad");
+    Solution solu;
+    std::string result = solu.longestPalindrome(s);
     std::cout << result << std::endl;
 }

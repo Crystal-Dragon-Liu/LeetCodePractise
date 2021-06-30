@@ -130,6 +130,10 @@ class Solution
             int                                 fib(int n);
             // easy 70. Climbing Stairs
             int                                 climbStairs(int n); 
+            // easy 746. Min Cost Climbing Stairs
+            int                                 minCostClimbingStairs(std::vector<int>& cost);
+            // normal 62. Unique Paths
+            int                                 uniquePaths(int m, int n);
 
 
     private:

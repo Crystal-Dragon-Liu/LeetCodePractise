@@ -134,6 +134,8 @@ class Solution
             int                                 minCostClimbingStairs(std::vector<int>& cost);
             // normal 62. Unique Paths
             int                                 uniquePaths(int m, int n);
+            // normal 63. Unique Paths II
+            int                                 uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid);
 
 
     private:

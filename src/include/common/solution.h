@@ -136,7 +136,8 @@ class Solution
             int                                 uniquePaths(int m, int n);
             // normal 63. Unique Paths II
             int                                 uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid);
-
+            // normal 343. Integer Break
+            int                                 integerBreak(int n);
 
     private:
             int                             post_index;

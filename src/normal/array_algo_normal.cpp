@@ -1,8 +1,11 @@
 #include "common/utils.h"
 #include "common/solution.h"
+#include <math.h>
 
-
-
+    // ! 1. the definition of DP array and its index.
+    // ! 2. recursion formula.
+    // ! 3. initialize the dp
+    // ! 4. the order of traversal 
 //=========================================================================================
 // ? 62. Unique Paths
 // A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram 
@@ -84,4 +87,32 @@ int  Solution::uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleG
         }
     }
     return dp[m-1][n-1];
+}
+//=========================================================================================
+// ? normal 343. Integer Break
+// Given an integer n, break it into the sum of k positive integers, 
+// where k >= 2, and maximize the product of those integers.
+// Return the maximum product you can get.
+//=========================================================================================
+int Solution::integerBreak(int n)
+{
+    // ! 1. the definition of DP array and its index.
+    // dp[i] stands for the the max sum of k  postive integers which are split by i 
+    // ! 2. recursion formula.
+    // dp[i] =  max(dp[i], max(dp[i-j] * j, j * (i-j)))
+    // ! 3. initialize the dp
+    // dp[2] = 1, dp[1], dp[0] would not be initialized in that these value are meanless.
+    // ! 4. the order of traversal 
+    // i from 3 to n, j from 1 to i - 1
+
+    std::vector<int> dp(n + 1);
+    dp[2] = 1;
+    for(int i = 3; i <= n; i++)
+    {
+        for(int j = 1; j < i - 1; j++)
+        {
+            dp[i] = std::max(dp[i], std::max(dp[i - j] * j, (i-j) * j));
+        }
+    }
+    return dp[n];
 }

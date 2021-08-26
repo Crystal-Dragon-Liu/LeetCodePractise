@@ -116,3 +116,24 @@ int Solution::integerBreak(int n)
     }
     return dp[n];
 }
+//=========================================================================================
+// ? 416. Partition Equal Subset Sum
+// Given a non-empty array nums containing only positive integers, 
+// find if the array can be partitioned into two subsets such that 
+// the sum of elements in both subsets is equal.
+//=========================================================================================
+bool Solution::canPartition(std::vector<int>& nums)
+{
+    // this problem should be converted to a 01 backpack problem.
+    // 1. the volumn of bagpack -> sum/2
+    // 2. each num should only used for one time.
+    // 3. the value of each num stands for both weight and value of item.
+
+    // ! 1. the definition of DP array and its index.
+    // dp[i] stands for that when there is a bagpack with total weights i,
+    // the max sum of subset is dp[i] 
+    // ! 2. recursion formula.
+    // ! 3. initialize the dp
+    // ! 4. the order of traversal 
+    return false;
+}

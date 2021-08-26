@@ -30,10 +30,54 @@ TEST(DynamicEasyTest, DISABLED_Test4)
     std::cout << result << std::endl;
 }
 
-TEST(DynamicEasyTest, Test5)
+TEST(DynamicEasyTest, DISABLED_Test5)
 {
     Solution solu;
     std::vector<std::vector<int> > obstacle{{0,0,0},{0, 1, 0}, {0, 0, 0}};
     int result = solu.uniquePathsWithObstacles(obstacle);
     std::cout << result << std::endl;
+}
+
+void test_bag_2d()
+{
+    // bag test
+    // weight vec
+    std::vector<int> weight{1, 3, 4};
+    std::vector<int> value{15, 20, 30};
+    std::vector<std::vector<int> > dp(weight.size() + 1, std::vector<int>(weight.back() + 1, 0));
+    for(int j = weight.back(); j >= weight[0]; j--)
+        dp[0][j] = dp[0][j - weight[0]] + value[0];
+    // traversal for dp
+    for(std::size_t i = 1; i < weight.size(); i++)
+        for(int j = 0; j <= weight.back(); j++)
+            if(j < weight[i]) dp[i][j] = dp[i-1][j];
+            else
+                dp[i][j] = std::max(dp[i-1][j- weight[i]] + value[i], dp[i-1][j]);
+    std::cout << dp[weight.size() - 1][weight.back()] << std::endl;
+}
+
+void test_bag_1d()
+{
+    std::vector<int> weight{1, 3, 4};
+    std::vector<int> value{15, 20, 30};
+    std::vector<int> dp(weight.back() + 1, 0);
+    // for(std::size_t i = 0; i < weight.size();i++){
+    //     for(int j = weight.back(); j >= weight[i]; j--)
+    //         {
+    //             dp[j] = std::max(dp[j - weight[i]] + value[i], dp[j]);
+    //         }
+    // }
+    for(int j = weight.back(); j >= weight[0]; j--)
+        for(std::size_t i = 0; i < weight.size();i++){
+            {
+                dp[j] = std::max(dp[j - weight[0]] + value[i], dp[j]);
+            }
+    }
+    std::cout << dp[weight.back()] << std::endl;
+}
+
+TEST(DynamicEasyTest, Test6)
+{
+    test_bag_2d();
+    test_bag_1d();
 }

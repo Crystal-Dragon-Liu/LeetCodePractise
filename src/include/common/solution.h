@@ -138,7 +138,8 @@ class Solution
             int                                 uniquePathsWithObstacles(std::vector<std::vector<int>>& obstacleGrid);
             // normal 343. Integer Break
             int                                 integerBreak(int n);
-
+            // normal 416. Partition Equal Subset Sum
+            bool                                canPartition(std::vector<int>& nums); 
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;

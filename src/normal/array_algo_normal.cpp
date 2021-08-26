@@ -1,7 +1,8 @@
 #include "common/utils.h"
 #include "common/solution.h"
 #include <math.h>
-
+#include <algorithm>
+#include <numeric>
     // ! 1. the definition of DP array and its index.
     // ! 2. recursion formula.
     // ! 3. initialize the dp
@@ -132,8 +133,27 @@ bool Solution::canPartition(std::vector<int>& nums)
     // ! 1. the definition of DP array and its index.
     // dp[i] stands for that when there is a bagpack with total weights i,
     // the max sum of subset is dp[i] 
+
     // ! 2. recursion formula.
+    // dp[i] = max ( dp[i], dp[i - num[i]]+ num[i] )
     // ! 3. initialize the dp
-    // ! 4. the order of traversal 
-    return false;
+    // make each element set to 0;
+    // ! 4. the order of traversal
+    // totally like bag problem.
+
+    // get sum / 2
+    int sum = 0;
+    for (std::size_t i = 0; i < nums.size(); i++) {sum += nums[i];}    
+    std::cout << "sum / 2: " << sum / 2 << std::endl;
+    std::vector<int> dp(10001, 0);
+    if(sum % 2 == 1) return false;
+    // the weight of bag -> sum /2
+    int target = sum/2;
+    for(std::size_t i = 0; i < nums.size(); i++)
+        for(int j = target; j >= nums[i]; j--)
+            dp[j] = std::max(dp[j - nums[i]] + nums[i], dp[j]);
+    if(dp[target] == target)
+        return true;
+    else
+        return false; 
 }

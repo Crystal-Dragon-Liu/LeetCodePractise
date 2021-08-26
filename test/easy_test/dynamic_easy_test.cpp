@@ -76,8 +76,16 @@ void test_bag_1d()
     std::cout << dp[weight.back()] << std::endl;
 }
 
-TEST(DynamicEasyTest, Test6)
+TEST(DynamicEasyTest, DISABLED_Test6)
 {
     test_bag_2d();
     test_bag_1d();
+}
+
+TEST(DynamicEasyTest, Test7)
+{
+    std::vector<int> nums{1, 5, 11, 5};
+    Solution so;
+    bool result = so.canPartition(nums);
+    EXPECT_EQ(true, result);
 }

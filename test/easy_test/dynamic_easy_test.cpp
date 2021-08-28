@@ -76,16 +76,40 @@ void test_bag_1d()
     std::cout << dp[weight.back()] << std::endl;
 }
 
-TEST(DynamicEasyTest, DISABLED_Test6)
+TEST(DynamicEasyTest, Test6)
 {
     test_bag_2d();
     test_bag_1d();
 }
 
-TEST(DynamicEasyTest, Test7)
+TEST(DynamicEasyTest, DISABLED_Test7)
 {
     std::vector<int> nums{1, 5, 11, 5};
     Solution so;
     bool result = so.canPartition(nums);
     EXPECT_EQ(true, result);
+}
+
+TEST(DynamicEasyTest, DISABLED_Test8)
+{
+    std::vector<int> nums{2,7,4,1,8,1};
+    Solution so;
+    int result = so.lastStoneWeightII(nums);
+    EXPECT_EQ(1, result);
+}
+
+TEST(DynamicEasyTest, DISABLED_findTargetSumWaysTest)
+{
+    std::vector<int> nums{1, 1, 1, 1, 1};
+    Solution so;
+    int result = so.findTargetSumWays(nums, 3);
+    EXPECT_EQ(5, result);
+}
+
+TEST(DynamicEasyTest, DISABLED_findMaxFormTest)
+{
+    std::vector<std::string> strs{"10","0001","111001","1","0"};
+    Solution so;
+    int result = so.findMaxForm(strs, 5, 3);
+    EXPECT_EQ(4, result);
 }

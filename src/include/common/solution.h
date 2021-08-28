@@ -140,6 +140,16 @@ class Solution
             int                                 integerBreak(int n);
             // normal 416. Partition Equal Subset Sum
             bool                                canPartition(std::vector<int>& nums); 
+
+            // normal 1049. Last Stone Weight II
+            int                                 lastStoneWeightII(std::vector<int>& stones);
+            // normal 494. Target Sum
+            int                                 findTargetSumWays(std::vector<int>& nums, int target);
+            // normal 474. Ones and Zeroes
+            int                                 findMaxForm(std::vector<std::string>& strs, int m, int n);
+
+            // normal 518. Coin Change 2
+            int                                 change(int amount, std::vector<int>& coins);
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;

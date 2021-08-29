@@ -386,5 +386,22 @@ int   Solution::findMaxForm(std::vector<std::string>& strs, int m, int n)
 
 int  Solution::change(int amount, std::vector<int>& coins)
 {
-    return 0;
+    // ! 1. the definition of DP array and its index.
+    // dp[j] stands for that there are dp[j] ways to fill the back whose capacity is set to j
+    
+    // ! 2. recursive formula.
+    // dp[j] += dp[j - coins[i]]
+    // before plus the dp[j - coins[i]], dp[j] stands for that there are dp[j] ways to fill the 
+    // bag whos capacity is set to J, without considering coins[i]
+    // to update the dp[j], we should additionally plus dp[j - coins[i]] which stands for the num
+    // of combination considering coins[i].
+
+    // ! 1. initialize dp
+    // dp[0] = 1    
+    std::vector<int> dp(amount+1, 0);
+    dp[0] = 1;
+    for(std::size_t i = 0; i < coins.size(); i++)
+        for(int j = coins[i]; j <= amount; j++)
+            {dp[j] += dp[j - coins[i]];}
+    return dp[amount];
 }

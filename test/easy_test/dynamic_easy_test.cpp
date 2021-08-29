@@ -76,7 +76,7 @@ void test_bag_1d()
     std::cout << dp[weight.back()] << std::endl;
 }
 
-TEST(DynamicEasyTest, Test6)
+TEST(DynamicEasyTest, DISABLED_Test6)
 {
     test_bag_2d();
     test_bag_1d();
@@ -111,5 +111,13 @@ TEST(DynamicEasyTest, DISABLED_findMaxFormTest)
     std::vector<std::string> strs{"10","0001","111001","1","0"};
     Solution so;
     int result = so.findMaxForm(strs, 5, 3);
+    EXPECT_EQ(4, result);
+}
+
+TEST(DynamicEasyTest, ChangeTest)
+{
+    std::vector<int> coins{1, 2, 5};
+    Solution so;
+    int result = so.change(5, coins);
     EXPECT_EQ(4, result);
 }

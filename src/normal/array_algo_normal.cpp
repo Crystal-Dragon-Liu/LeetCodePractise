@@ -542,3 +542,47 @@ int   Solution::coinChange(std::vector<int>& coins, int amount)
     if(dp[amount] == INT32_MAX) return -1;
     return dp[amount];
 }
+
+//=========================================================================================
+// 279. Perfect Squares
+// Given an integer n, return the least number of perfect square numbers that sum to n.
+
+// A perfect square is an integer that is the square of an integer; in other words, 
+// it is the product of some integer with itself. For example, 1, 4, 9,
+//  and 16 are perfect squares while 3 and 11 are not.
+
+// Example 1:
+
+// Input: n = 12
+// Output: 3
+// Explanation: 12 = 4 + 4 + 4.
+// Example 2:
+
+// Input: n = 13
+// Output: 2
+// Explanation: 13 = 4 + 9.
+//=========================================================================================
+
+int  Solution::numSquares(int n)
+{
+    //! definition of dp
+    // dp[j] means that there are minimum dp[j] ps(prefect square) which could add up to j
+    //! initialize dp
+    // dp[0] = 1
+    //! recursive formula
+    // dp[j] = min(dp[j], dp[j - square[i]] + 1)
+    //! order of traversal
+    // only require count of squares, Permutation and combination is not nesscessary.
+    // traverse bag firstly or vise versa is either ok.
+    std::vector<int> dp(n+1, INT32_MAX);
+    dp[0] = 0;
+    // for(int j = 0; j <= n; j++)
+    //     for(int i = 0; i*i <= j; i++)
+    //         if(dp[j-i*i] != INT32_MAX)
+    //             dp[j] = std::min(dp[j], dp[j - i*i] + 1);
+    for(int i = 1; i*i <=n; i++)
+        for(int j = i*i; j <= n; j++)
+            // if(dp[j-i*i] != INT32_MAX)
+                dp[j] = std::min(dp[j], dp[j - i*i] + 1);
+    return dp[n];
+}

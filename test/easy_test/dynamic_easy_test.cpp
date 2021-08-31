@@ -146,3 +146,11 @@ TEST(DynamicEasyTest, coinChangeTest)
     EXPECT_EQ(3, so.coinChange(coins, amount));
     // EXPECT_EQ(7, so.combinationSum4(nums, target));
 }
+
+TEST(DynamicEasyTest, numSquareTest)
+{
+    Solution so;
+
+    EXPECT_EQ(3, so.numSquares(12));
+    // EXPECT_EQ(7, so.combinationSum4(nums, target));
+}

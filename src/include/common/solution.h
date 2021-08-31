@@ -154,6 +154,8 @@ class Solution
             int                                 combinationSum4(std::vector<int>& nums, int target);
             // normal 322. Coin Change
             int                                 coinChange(std::vector<int>& coins, int amount);
+            // 279. Perfect Squares
+            int                                 numSquares(int n);
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;

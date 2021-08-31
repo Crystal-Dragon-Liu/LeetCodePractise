@@ -130,6 +130,8 @@ class Solution
             int                                 fib(int n);
             // easy 70. Climbing Stairs
             int                                 climbStairs(int n); 
+            int                                 climbStairsDP(int n, int m);
+
             // easy 746. Min Cost Climbing Stairs
             int                                 minCostClimbingStairs(std::vector<int>& cost);
             // normal 62. Unique Paths
@@ -140,19 +142,18 @@ class Solution
             int                                 integerBreak(int n);
             // normal 416. Partition Equal Subset Sum
             bool                                canPartition(std::vector<int>& nums); 
-
             // normal 1049. Last Stone Weight II
             int                                 lastStoneWeightII(std::vector<int>& stones);
             // normal 494. Target Sum
             int                                 findTargetSumWays(std::vector<int>& nums, int target);
             // normal 474. Ones and Zeroes
             int                                 findMaxForm(std::vector<std::string>& strs, int m, int n);
-
             // normal 518. Coin Change 2
             int                                 change(int amount, std::vector<int>& coins);
-
             // normal 377. Combination Sum IV
             int                                 combinationSum4(std::vector<int>& nums, int target);
+            // normal 322. Coin Change
+            int                                 coinChange(std::vector<int>& coins, int amount);
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;

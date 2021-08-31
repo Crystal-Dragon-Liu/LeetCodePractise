@@ -122,7 +122,7 @@ TEST(DynamicEasyTest, DISABLED_ChangeTest)
     EXPECT_EQ(4, result);
 }
 
-TEST(DynamicEasyTest, combinationSum4)
+TEST(DynamicEasyTest, DISABLED_combinationSum4Test)
 {
     Solution so;
     std::vector<int> nums
@@ -135,5 +135,14 @@ TEST(DynamicEasyTest, combinationSum4)
     int target = 999;
     int result = so.combinationSum4(nums, target);
     EXPECT_EQ(result, 1);
+    // EXPECT_EQ(7, so.combinationSum4(nums, target));
+}
+
+TEST(DynamicEasyTest, coinChangeTest)
+{
+    Solution so;
+    std::vector<int> coins{1, 2, 5};
+    int amount = 11;
+    EXPECT_EQ(3, so.coinChange(coins, amount));
     // EXPECT_EQ(7, so.combinationSum4(nums, target));
 }

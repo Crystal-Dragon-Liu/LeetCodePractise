@@ -79,6 +79,26 @@ int  Solution::climbStairs(int n)
     // std::cout << std::endl;
     return dp[n];
 }
+
+int  Solution::climbStairsDP(int n, int m)
+{
+    // ? m stands for that the maximum stairs is set to m
+    // ! 1. the definition of DP array and its index.
+    // dp[i] stands for that there are dp[i] ways to reach the stairs when there is i stairs
+    // ! 2. recursion formula.
+    // dp[j] += dp[j - i]
+    // ! 3. initialize the dp
+    // dp[0] = 1
+    std::vector<int> dp(n + 1, 0);
+    for(int j = 0; j <= n; j++)
+        for(int i = 0; i <= m; i++)
+        {
+            if(j - i >= 0)
+                dp[j] += dp[j - i];
+        }
+    return dp[n];
+}
+
 //=========================================================================================
 // ? 746. Min Cost Climbing Stairs
 // You are given an integer array cost where cost[i] is the cost of ith step on a staircase. 

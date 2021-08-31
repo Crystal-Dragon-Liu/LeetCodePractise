@@ -400,8 +400,89 @@ int  Solution::change(int amount, std::vector<int>& coins)
     // dp[0] = 1    
     std::vector<int> dp(amount+1, 0);
     dp[0] = 1;
-    for(std::size_t i = 0; i < coins.size(); i++)
-        for(int j = coins[i]; j <= amount; j++)
-            {dp[j] += dp[j - coins[i]];}
+    // for(std::size_t i = 0; i < coins.size(); i++)
+    // {
+    //     std::cout << "============ coins[" << i << "]->" <<  coins[i] << " ============" << std::endl;
+    //     for(int j = coins[i]; j <= amount; j++)
+    //         {
+    //             dp[j] += dp[j - coins[i]];
+    //             for(int dp_element: dp)
+    //                 std::cout << dp_element << ", ";
+    //             std::cout << std::endl;
+    //         }
+    //     // each combination would only be considered once.
+    // }
+
+    // change the order
+    for(int j = 0; j <= amount; j++){
+        std::cout << "============ bag[" << j << "] ============" << std::endl;
+        for(std::size_t i = 0; i < coins.size(); i++){
+            if(j - coins[i] >= 0)
+            {
+                dp[j] += dp[j-coins[i]];
+                for(int dp_element: dp)
+                    std::cout << dp_element << ", ";
+                std::cout << std::endl;
+            }
+            // this order would result in that a dp[j] updated incorrectly, such as
+        }
+    }
     return dp[amount];
+}
+
+//=========================================================================================
+// Given an array of distinct integers nums and a target integer target, 
+// return the number of possible combinations that add up to target.
+// The answer is guaranteed to fit in a 32-bit integer.
+
+// Example 1:
+
+// Input: nums = [1,2,3], target = 4
+// Output: 7
+// Explanation:
+// The possible combination ways are:
+// (1, 1, 1, 1)
+// (1, 1, 2)
+// (1, 2, 1)
+// (1, 3)
+// (2, 1, 1)
+// (2, 2)
+// (3, 1)
+// Note that different sequences are counted as different combinations.
+// Example 2:
+
+// Input: nums = [9], target = 3
+// Output: 0
+//  
+
+// Constraints:
+// 1 <= nums.length <= 200
+// 1 <= nums[i] <= 1000
+// All the elements of nums are unique.
+// 1 <= target <= 1000
+//  
+
+// Follow up: What if negative numbers are allowed in the given array? 
+// How does it change the problem? 
+// What limitation we need to add to the question to allow negative numbers?
+//=========================================================================================
+
+int  Solution::combinationSum4(std::vector<int>& nums, int target)
+{
+    // ! 1. the definition of DP array and its index.
+    // dp[i] means there are dp[i] kinds of combinations to fill the bag whose capacity is 
+    // set to i
+    // ! 2. recursive formula.
+    // dp[j] += dp[j - nums[i]];
+    // ! 1. initialize dp
+    // dp[0] = 1
+    std::vector<int> dp(target+1, 0);
+    dp[0] = 1;
+    for(int j = 0; j <= target; j++)
+        for(std::size_t i = 0; i < nums.size() ; i++)
+        {
+            if(j >= nums[i] && dp[j] < (INT32_MAX - dp[j - nums[i]]))
+                dp[j] += dp[j - nums[i]];
+        }
+    return dp[target];
 }

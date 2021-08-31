@@ -150,6 +150,9 @@ class Solution
 
             // normal 518. Coin Change 2
             int                                 change(int amount, std::vector<int>& coins);
+
+            // normal 377. Combination Sum IV
+            int                                 combinationSum4(std::vector<int>& nums, int target);
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;

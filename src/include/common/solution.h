@@ -156,6 +156,8 @@ class Solution
             int                                 coinChange(std::vector<int>& coins, int amount);
             // 279. Perfect Squares
             int                                 numSquares(int n);
+            // 139. Word Break
+            bool wordBreak(std::string s, std::vector<std::string>& wordDict);
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;

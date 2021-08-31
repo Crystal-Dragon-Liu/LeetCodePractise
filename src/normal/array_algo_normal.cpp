@@ -3,6 +3,7 @@
 #include <math.h>
 #include <algorithm>
 #include <numeric>
+#include <unordered_set>
     // ! 1. the definition of DP array and its index.
     // ! 2. recursion formula.
     // ! 3. initialize the dp
@@ -544,7 +545,7 @@ int   Solution::coinChange(std::vector<int>& coins, int amount)
 }
 
 //=========================================================================================
-// 279. Perfect Squares
+//? 279. Perfect Squares
 // Given an integer n, return the least number of perfect square numbers that sum to n.
 
 // A perfect square is an integer that is the square of an integer; in other words, 
@@ -585,4 +586,44 @@ int  Solution::numSquares(int n)
             // if(dp[j-i*i] != INT32_MAX)
                 dp[j] = std::min(dp[j], dp[j - i*i] + 1);
     return dp[n];
+}
+
+//=========================================================================================
+//? 139. Word Break
+// Given a string s and a dictionary of strings wordDict, 
+// return true if s can be segmented into a space-separated sequence of one or more dictionary words.
+
+// Note that the same word in the dictionary may be reused multiple times in the segmentation.
+// Example 1:
+
+// Input: s = "leetcode", wordDict = ["leet","code"]
+// Output: true
+// Explanation: Return true because "leetcode" can be segmented as "leet code".
+// Example 2:
+
+// Input: s = "applepenapple", wordDict = ["apple","pen"]
+// Output: true
+// Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
+// Note that you are allowed to reuse a dictionary word.
+// Example 3:
+
+// Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+// Output: false
+//=========================================================================================
+bool Solution::wordBreak(std::string s, std::vector<std::string>& wordDict)
+{
+    //! defintion of dp
+    // dp[j] stands for that whether the s could be split into words which are contained in wordDict.
+    //! recursive fomula.
+    // dp[j] = dp[j - wordDict[i].size()] == true && dp[j]
+    std::vector<bool> dp(s.size() + 1, false);
+    std::unordered_set<std::string> wordSet(wordDict.begin(), wordDict.end());
+    dp[0] = 1;
+    for(std::size_t j = 1; j <= s.size(); j++)
+        for(std::size_t i = 0; i < j; i++){
+            std::string word = s.substr(j, j-i);
+            if(wordSet.find(word) != wordSet.end() && dp[i])
+                dp[j] = true;
+        }
+    return dp[s.size()];
 }

@@ -154,3 +154,13 @@ TEST(DynamicEasyTest, numSquareTest)
     EXPECT_EQ(3, so.numSquares(12));
     // EXPECT_EQ(7, so.combinationSum4(nums, target));
 }
+
+TEST(DynamicEasyTest, wordBreakTest)
+{
+    Solution so;
+    std::vector<std::string> strVec{"cats", "dog", "sand", "and", "cat"};
+    std::string str("catsandog");
+    bool result = so.wordBreak(str, strVec);
+    EXPECT_EQ(false, result);
+    // EXPECT_EQ(7, so.combinationSum4(nums, target));
+}

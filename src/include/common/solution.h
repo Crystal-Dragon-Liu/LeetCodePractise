@@ -157,7 +157,10 @@ class Solution
             // 279. Perfect Squares
             int                                 numSquares(int n);
             // 139. Word Break
-            bool wordBreak(std::string s, std::vector<std::string>& wordDict);
+            bool                                wordBreak(std::string s, std::vector<std::string>& wordDict);
+            // 198. House Robber
+            int                                 rob(std::vector<int>& nums);
+
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;

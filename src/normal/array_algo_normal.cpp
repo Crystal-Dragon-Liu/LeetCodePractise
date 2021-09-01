@@ -674,7 +674,55 @@ int  Solution::rob(std::vector<int>& nums)
     dp[1] = std::max(nums[0], nums[1]);
     // bag -> nums.size();
     // items -> nums[i]
-    for(int i = 2; i < nums.size(); i++)
+    for(std::size_t i = 2; i < nums.size(); i++)
         dp[i] = std::max(dp[i-1], dp[i-2] + nums[i]);
-    return nums[nums.size() - 1];
+    return dp[nums.size() - 1];
 }
+
+
+//=========================================================================================
+// ? 213. House Robber II
+// You are a professional robber planning to rob houses along a street. 
+// Each house has a certain amount of money stashed. 
+// All houses at this place are arranged in a circle. 
+// That means the first house is the neighbor of the last one. 
+// Meanwhile, adjacent houses have a security system connected, 
+// and it will automatically contact the police 
+// if two adjacent houses were broken into on the same night.
+
+// Given an integer array nums representing the amount of money of each house,
+//  return the maximum amount of money you can rob tonight without alerting the police.
+
+//  
+
+// Example 1:
+
+// Input: nums = [2,3,2]
+// Output: 3
+// Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
+// Example 2:
+
+// Input: nums = [1,2,3,1]
+// Output: 4
+// Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+// Total amount you can rob = 1 + 3 = 4.
+// Example 3:
+
+// Input: nums = [1,2,3]
+// Output: 3
+
+//=========================================================================================
+int  Solution::robII(std::vector<int>& nums)
+{
+    // as for a cycle structure.
+    // there are only 2 situations we should consider.
+    // such as nums -> [1, 2, 3, 4] where the nums[0] and nums[3] would be linked together.
+    // 1. because of the cycle structure, if we choose 1, 2, 3, the 4-th item must be given up.
+    // 2. like former statement, if we choose 2, 3, 4, the first item must be given up
+    if(nums.size() == 0) return 0;
+    if(nums.size() == 1) return nums[0];
+    int resultA = robRange(nums, 0, nums.size() - 2);
+    int resultB = robRange(nums, 1, nums.size() - 1);
+    return std::max(resultA, resultB);
+}
+

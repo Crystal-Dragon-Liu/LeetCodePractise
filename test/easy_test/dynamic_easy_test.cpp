@@ -164,3 +164,15 @@ TEST(DynamicEasyTest, wordBreakTest)
     EXPECT_EQ(false, result);
     // EXPECT_EQ(7, so.combinationSum4(nums, target));
 }
+
+TEST(DynamicEasyTest, robIITest)
+{
+    Solution so;
+    std::vector<int> nums{2, 3, 2};
+    int result = so.robII(nums);
+    std::vector<int> nums1{1, 2, 3, 1};
+    int result1 = so.robII(nums1);
+    EXPECT_EQ(result, 3);
+    EXPECT_EQ(result1, 4);
+
+}

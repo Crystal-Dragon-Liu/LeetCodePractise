@@ -160,6 +160,9 @@ class Solution
             bool                                wordBreak(std::string s, std::vector<std::string>& wordDict);
             // 198. House Robber
             int                                 rob(std::vector<int>& nums);
+            // 213. House Robber II
+            int                                 robII(std::vector<int>& nums);
+            int                                 robRange(std::vector<int>& nums, int start, int end);
 
     private:
             int                             post_index;

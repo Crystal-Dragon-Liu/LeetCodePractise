@@ -163,6 +163,9 @@ class Solution
             // 213. House Robber II
             int                                 robII(std::vector<int>& nums);
             int                                 robRange(std::vector<int>& nums, int start, int end);
+            // 337. House Robber III
+            int                                 rob(TreeNode* root);
+            std::vector<int>                    robTree(TreeNode* root);
 
     private:
             int                             post_index;

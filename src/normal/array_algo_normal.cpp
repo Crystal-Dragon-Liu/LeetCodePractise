@@ -726,3 +726,63 @@ int  Solution::robII(std::vector<int>& nums)
     return std::max(resultA, resultB);
 }
 
+int  Solution::robRange(std::vector<int>& nums, int start, int end)
+{
+    if(start==end)
+        return nums[start];
+    std::vector<int> dp(nums.size(), 0);
+    dp[start] = nums[start];
+    dp[start+1] = std::max(nums[start], nums[start+1]);
+    for(int i = start+2; i <= end; i++)
+        dp[i] = std::max(dp[i-1], dp[i-2] + nums[i]);
+    return dp[end];
+}
+
+
+
+//=========================================================================================
+//? 337. House Robber III
+// The thief has found himself a new place for his thievery again. 
+// There is only one entrance to this area, called root.
+
+// Besides the root, each house has one and only one parent house. 
+// After a tour, the smart thief realized that all houses in this place form a binary tree.
+// It will automatically contact the police 
+// if two directly-linked houses were broken into on the same night.
+
+// Given the root of the binary tree, 
+// return the maximum amount of money the thief can rob without alerting the police.
+//=========================================================================================
+int  Solution::rob(TreeNode* root)
+{
+    //! dp[0] stands for that as for current node, the maximum value we could get without current value.
+    //! dp[1] stands for that as for current node, the maximum value we could get with current value.
+
+    // ! recursive fomula.
+    // if we don't consider current node.
+    // the max value = cur->node + left_dp[0] + right_dp[0]
+    // left_dp[0] means the maximum value of left sub-tree  without considering current node.
+    // right_dp[1] means the maximum value of right sub-tree without considering current node.
+    // else
+    // max value = max(left_dp[0], left_dp[1]) + max(right_dp[0], right_dp[1])
+    // so the next_dp we should return is set to 
+    //{cur->node + left_dp[0] + right_dp[0], max(left_dp[0], left_dp[1]) + max(right_dp[0], right_dp[1])}
+    if(!root) return 0;
+    // if(!root->right && !root->left)
+    //     return root->val;
+    std::vector<int> result = robTree(root);
+    return std::max(result[0], result[1]);
+}
+
+std::vector<int>    Solution::robTree(TreeNode* root)
+{
+    if(!root) return std::vector<int>(2, 0);
+    std::vector<int> left_dp = robTree(root->left);
+    std::vector<int> right_dp = robTree(root->right);
+
+    //calculate next_dp
+    int val_left = root->val + left_dp[0] + right_dp[0];
+    int val_right = std::max(left_dp[0], left_dp[1]) +
+                    std::max(right_dp[0], right_dp[1]);
+    return {val_right, val_left};
+}

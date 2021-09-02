@@ -220,3 +220,32 @@ std::vector<double>     Solution::averageOfLevels(TreeNode* root)
     }
     return result;
 }
+
+//=========================================================================================
+//? 515. Find Largest Value in Each Tree Row
+// Given the root of a binary tree,
+// return the average value of the nodes on each level in the form of an array. 
+// Answers within 10-5 of the actual answer will be accepted.
+//=========================================================================================
+std::vector<int>  Solution::largestValues(TreeNode* root)
+{
+    std::queue<TreeNode*> q;
+    std::vector<int> result;
+    auto max = INT32_MIN;
+    if(root) q.push(root);
+    while(!q.empty()){
+        std::size_t size = q.size();
+        for(std::size_t i = 0; i < size; i++){
+            TreeNode* node = q.front();
+            max = std::max(max, node->val);
+            q.pop();
+            if(node->left)
+                q.push(node->left);
+            if(node->right)
+                q.push(node->right);
+        }
+        result.push_back(max);
+        max = INT32_MIN;
+    }
+    return result;
+}

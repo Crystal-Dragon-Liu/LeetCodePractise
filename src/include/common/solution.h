@@ -169,6 +169,8 @@ class Solution
             std::vector<int>                    robTree(TreeNode* root);
             // 637. Average of Levels in Binary Tree
             std::vector<double>                 averageOfLevels(TreeNode* root);
+            // 515. Find Largest Value in Each Tree Row
+            std::vector<int>                    largestValues(TreeNode* root);
 
     private:
             int                             post_index;

@@ -249,3 +249,17 @@ std::vector<int>  Solution::largestValues(TreeNode* root)
     }
     return result;
 }
+
+
+//=========================================================================================
+//? 226. Invert Binary Tree
+// Given the root of a binary tree, invert the tree, and return its root.
+//=========================================================================================
+TreeNode*     Solution::invertTree(TreeNode* root)
+{
+    if(!root) return root;
+    std::swap(root->left, root->right);
+    invertTree(root->left);
+    invertTree(root->right);
+    return root;
+}

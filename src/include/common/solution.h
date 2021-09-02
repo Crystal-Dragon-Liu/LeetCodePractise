@@ -171,6 +171,8 @@ class Solution
             std::vector<double>                 averageOfLevels(TreeNode* root);
             // 515. Find Largest Value in Each Tree Row
             std::vector<int>                    largestValues(TreeNode* root);
+            // 226. Invert Binary Tree
+            TreeNode*                           invertTree(TreeNode* root);
 
     private:
             int                             post_index;

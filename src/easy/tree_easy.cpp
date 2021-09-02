@@ -192,5 +192,31 @@ void   Solution::buildPath(TreeNode* root, std::string path, std::vector<std::st
         }
     } 
 }
+//=========================================================================================
+//? 637. Average of Levels in Binary Tree
+// Given the root of a binary tree,
+// return the average value of the nodes on each level in the form of an array. 
+// Answers within 10-5 of the actual answer will be accepted.
+//=========================================================================================
 
-
+std::vector<double>     Solution::averageOfLevels(TreeNode* root)
+{
+    std::queue<TreeNode*> queue;
+    std::vector<double> result;
+    queue.push(root);
+    while(!queue.empty()){
+        std::size_t size = queue.size();
+        int sum = 0;
+        for(std::size_t i = 0; i < size; i++){
+            TreeNode* node = queue.front();
+            sum += node->val;
+            queue.pop();
+            if(node->left)
+                queue.push(node->left);
+            if(node->right)
+                queue.push(node->right);
+        }
+        result.push_back(sum /size);
+    }
+    return result;
+}

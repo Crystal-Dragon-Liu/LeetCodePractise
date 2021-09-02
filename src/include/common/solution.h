@@ -40,6 +40,7 @@ class Solution
             std::vector<int>                    preorderTraversal(TreeNode* root);
             void                                preTraversal(TreeNode* root, std::vector<int>& data);
             // normal 94. Binary Tree Inorder Traversal
+            std::vector<int>                    inorderTraversalII(TreeNode* root);
             std::vector<int>                    inorderTraversal(TreeNode* root);
             void                                inTraversal(TreeNode* root, std::vector<int>& data);
             // normal 145. Binary Tree Postorder Traversal
@@ -166,6 +167,8 @@ class Solution
             // 337. House Robber III
             int                                 rob(TreeNode* root);
             std::vector<int>                    robTree(TreeNode* root);
+            // 637. Average of Levels in Binary Tree
+            std::vector<double>                 averageOfLevels(TreeNode* root);
 
     private:
             int                             post_index;

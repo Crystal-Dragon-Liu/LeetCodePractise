@@ -2,6 +2,7 @@
 #include "common/utils.h"
 #include <algorithm>
 #include <math.h>
+#include <stack>
 
 /* 144. Binary Tree Preorder Traversal */
 // Given the root of a binary tree, return the preorder traversal of its nodes' values.
@@ -57,6 +58,38 @@ std::vector<int> Solution::inorderTraversal(TreeNode* root)
         return result;
     }
 }
+
+std::vector<int>   Solution::inorderTraversalII(TreeNode* root)
+{
+    std::vector<int> result;
+    std::stack<TreeNode*> st;
+    if(root)
+        st.push(root);
+    while(!st.empty()){
+        TreeNode* node = st.top();
+        if(node != nullptr)
+        {
+        st.pop();
+        if(node->right)
+            st.push(node->right);
+
+        st.push(node);
+        st.push(nullptr);
+        
+        if(node->left)
+            st.push(node->left);
+        }
+        else{
+            st.pop();
+            node = st.top();
+            st.pop();
+            result.push_back(node->val);
+        }
+       
+    }
+    return result;
+}
+
 void Solution::inTraversal(TreeNode* root, std::vector<int>& data)
 {
     if(root)

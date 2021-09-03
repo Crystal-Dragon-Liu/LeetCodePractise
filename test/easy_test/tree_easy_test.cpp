@@ -26,7 +26,7 @@ TEST(TreeEasyTest, DISABLED_Test1)
 
 
     Solution solu;
-    int result = solu.maxDepth(root);
+    int result = solu.maxDepthLevelOrder(root);
     ASSERT_EQ(result, 3);
     delete root;
     delete root_left_node;

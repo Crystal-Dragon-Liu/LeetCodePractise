@@ -50,6 +50,7 @@ class Solution
             std::vector<std::vector<int>>       levelOrder(TreeNode* root);
             // easy 104. Maximum Depth of Binary Tree
             int                                 maxDepth(TreeNode* root);
+            int                                 maxDepthLevelOrder(TreeNode* root);
             // easy 101. Symmetric Tree
             bool                                isSymmetric(TreeNode* root);
             bool                                check(TreeNode* p, TreeNode* q);

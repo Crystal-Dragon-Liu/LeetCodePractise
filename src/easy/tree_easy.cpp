@@ -2,6 +2,7 @@
 #include "common/utils.h"
 #include <math.h>
 #include <algorithm>
+#include <stack>
 
 /*104. Maximum Depth of Binary Tree*/
 /* 
@@ -261,5 +262,72 @@ TreeNode*     Solution::invertTree(TreeNode* root)
     std::swap(root->left, root->right);
     invertTree(root->left);
     invertTree(root->right);
+    return root;
+}
+
+TreeNode*    Solution::invertTreeIterFront(TreeNode* root)
+{
+    if(!root) return root;
+    std::stack<TreeNode*> st;
+    st.push(root);
+    while(!st.empty()){
+        TreeNode* node = st.top();
+        st.pop();
+        // process data.
+        std::swap(root->left, root->right);
+        if(node->left)
+            st.push(node->right);
+        if(node->right)
+            st.push(node->left);
+    }
+    return root;
+}
+
+TreeNode*   Solution::invertTreeIterCommonFront(TreeNode* root){
+    if(!root) return root;
+    std::stack<TreeNode*> st;
+    std::vector<int> result;
+    st.push(root);
+    while(!st.empty()){
+        TreeNode* node = st.top();
+        st.pop();
+        if(node){
+            // process node.
+            if(node->right)
+                st.push(node->right);
+            if(node->left)
+                st.push(node->left);
+            st.push(node);
+            st.push(nullptr);
+        }
+        else{
+            // when we traverse the root node, processing the data.
+            st.pop();
+            TreeNode* node = st.top();
+            st.pop();
+            std::swap(node->left, node->right);
+        }
+    }
+    return root;
+}
+
+TreeNode*  Solution::invertTreeLevelOrder(TreeNode* root)
+{
+    if(!root) return root;
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()){
+        std::size_t size = q.size();
+        for(std::size_t i = 0; i < size; i++){
+            // process data.
+            TreeNode* node = q.front();
+            q.pop();
+            std::swap(node->left, node->right);
+            if(node->left)
+                q.push(node->left);
+            if(node->right)
+                q.push(node->right);
+        }
+    }
     return root;
 }

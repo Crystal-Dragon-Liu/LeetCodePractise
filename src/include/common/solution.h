@@ -173,6 +173,9 @@ class Solution
             std::vector<int>                    largestValues(TreeNode* root);
             // 226. Invert Binary Tree
             TreeNode*                           invertTree(TreeNode* root);
+            TreeNode*                           invertTreeIterFront(TreeNode* root);
+            TreeNode*                           invertTreeIterCommonFront(TreeNode* root);
+            TreeNode*                           invertTreeLevelOrder(TreeNode* root);
 
     private:
             int                             post_index;

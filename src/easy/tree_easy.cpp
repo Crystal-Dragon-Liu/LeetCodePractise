@@ -36,6 +36,47 @@ bool Solution::check(TreeNode* p, TreeNode* q)
     return (p->val == q->val) && check(q->right, p->left) && check(p->right, q->left);
 }
 
+bool  Solution::checkV2(TreeNode* p, TreeNode* q)
+{
+    if(!p && !q)
+        return true;
+    else if(!p&&q)
+        return false;
+    else if(!q&&p)
+        return false;
+    else if(q->val != p->val)
+        return false;
+    bool left = checkV2(q->left, p->right);
+    bool right = checkV2(p->left, q->right);
+    return left && right;
+}
+
+bool Solution::isSymmetricV2(TreeNode* root)
+{
+    if(!root) return true;
+    std::queue<TreeNode*> q;
+    q.push(root->left);
+    q.push(root->right);
+    while(!q.empty()){
+        TreeNode* node_left = q.front();
+        q.pop();
+        TreeNode* node_right = q.front();
+        q.pop();
+        if(!node_left&&!node_right)
+        {
+            continue;
+        }
+        else if(!node_left&&node_right) return false;
+        else if(node_left && !node_right) return false;
+        else if(node_right->val != node_left->val) return false;
+        q.push(node_right->left);
+        q.push(node_left->right);
+        q.push(node_right->right);
+        q.push(node_left->left);
+    }
+    return true;
+}
+
 /*
 ** @brief Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
 ** A leaf is a node with no children. 
@@ -331,3 +372,40 @@ TreeNode*  Solution::invertTreeLevelOrder(TreeNode* root)
     }
     return root;
 }
+
+//=========================================================================================
+// ? 3. Longest Substring Without Repeating Characters
+// Given a string s, find the length of the longest substring without repeating characters.
+//=========================================================================================
+
+int  Solution::lengthOfLongestSubstring(std::string s){
+    // // 记录字符上一次出现的位置
+    //     int[] last = new int[128];
+    //     for(int i = 0; i < 128; i++) {
+    //         last[i] = -1;
+    //     }
+    //     int n = s.length();
+
+    //     int res = 0;
+    //     int start = 0; // 窗口开始位置
+    //     for(int i = 0; i < n; i++) {
+    //         int index = s.charAt(i);
+    //         start = Math.max(start, last[index] + 1);
+    //         res   = Math.max(res, i - start + 1);
+    //         last[index] = i;
+    //     }
+
+    //     return res;
+    std::vector<int> last(128, -1);
+    int n = s.length();
+    int res = 0;
+    int start = 0;
+    for(int i = 0; i < n; i++){
+        int index = s.at(i);
+        start = std::max(start, last[index] + 1);
+        res   = std::max(res, i - start + 1);
+        last[index] = i;
+    }
+    return res;
+}
+

@@ -35,7 +35,7 @@ TEST(TreeEasyTest, DISABLED_Test1)
     delete root_right_left_node;
 }
 
-TEST(TreeEasyTest, DISABLED_Test2)
+TEST(TreeEasyTest, Test2)
 {
      //initialize a TreeNode List.
     TreeNode* root = new TreeNode(3, nullptr, nullptr);
@@ -50,7 +50,7 @@ TEST(TreeEasyTest, DISABLED_Test2)
 
     // check if the tree is symmetric.
     Solution solu;
-    bool result = solu.isSymmetric(root);
+    bool result = solu.isSymmetricV2(root);
     ASSERT_EQ(result, false);
 
     delete root;

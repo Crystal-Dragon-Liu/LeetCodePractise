@@ -53,6 +53,8 @@ class Solution
             // easy 101. Symmetric Tree
             bool                                isSymmetric(TreeNode* root);
             bool                                check(TreeNode* p, TreeNode* q);
+            bool                                checkV2(TreeNode* p, TreeNode* q);
+            bool                                isSymmetricV2(TreeNode* root);
             // easy Given the root of a binary tree and an integer targetSum
             bool                                hasPathSum(TreeNode* root, int targetSum);
             // normal 106. Construct Binary Tree from Inorder and Postorder Traversal
@@ -176,6 +178,7 @@ class Solution
             TreeNode*                           invertTreeIterFront(TreeNode* root);
             TreeNode*                           invertTreeIterCommonFront(TreeNode* root);
             TreeNode*                           invertTreeLevelOrder(TreeNode* root);
+            int                                 lengthOfLongestSubstring(std::string s);
 
     private:
             int                             post_index;

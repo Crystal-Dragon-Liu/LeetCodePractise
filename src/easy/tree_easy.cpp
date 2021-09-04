@@ -18,6 +18,37 @@ int Solution::maxDepth(TreeNode* root)
     return std::max(left_max, right_max) + 1;
 }
 
+int  Solution::maxDepthPostOrder(TreeNode* root)
+{
+    if(!root) return 0;
+    std::stack<TreeNode*> st;
+    st.push(root);
+    int depth = 0;
+    int result = 0;
+    while(!st.empty()){
+        TreeNode* node = st.top();
+        st.pop();
+        if(node){
+            st.push(node);
+            st.push(NULL);
+            depth++;
+            if(node->left)
+                st.push(node->right);
+            if(node->right)
+                st.push(node->left);
+        }
+        else{
+            st.pop();
+            node = st.top();
+            st.pop();
+            depth--;
+        }
+        result = result > depth ? result: depth;
+    }
+    return depth;
+}
+
+
 int  Solution::maxDepthLevelOrder(TreeNode* root){
     if(root == nullptr)
         return 0;
@@ -31,6 +62,26 @@ int  Solution::maxDepthLevelOrder(TreeNode* root){
             q.pop();
             if(node->left) q.push(node->left);
             if(node->right) q.push(node->right);
+        }
+        result++;
+    }
+    return result;
+}
+
+int Solution::maxDepth(NTree::Node* root)
+{
+    if(root == nullptr)
+        return 0;
+    std::queue<NTree::Node*> q;
+    int result = 1;
+    q.push(root);
+    while(!q.empty()){
+        std::size_t size = q.size();
+        for(std::size_t i = 0; i < size; i++){
+            NTree::Node* node = q.front();
+            q.pop();
+            for(std::size_t j = 0; j < node->children.size(); i++)
+                if(node->children[i]) q.push(node->children[i]);
         }
         result++;
     }
@@ -183,6 +234,47 @@ int                             Solution::minDepth(TreeNode* root)
     }
     return 0;
 }
+
+int    Solution::minDepthRecursive(TreeNode* root)
+{
+    // if(!root) return 0;
+    // if(!root->left && !root->right) return 1;
+    // int depth;
+    // if(!root->left)
+    //     depth = 1 + minDepthRecursive(root->right);
+    // if(!root->right)
+    //     depth = 1 + minDepthRecursive(root->left);
+    // return depth;
+    if(!root) return 0;
+    int leftDepth = minDepthRecursive(root->left);
+    int rightDepth = minDepthRecursive(root->right);
+    if(!root->left && root->right)
+        return 1 + rightDepth;
+    if(!root->right && root->left)
+        return 1 + leftDepth;
+    return 1 + std::min(leftDepth, rightDepth);
+}
+
+int   Solution::minDepthIterator(TreeNode* root){
+    if(!root) return 0;
+    std::queue<TreeNode*> queue;
+    queue.push(root);
+    int minDepth = 0;
+    while(!queue.empty()){
+        std::size_t size = queue.size();
+        minDepth++;
+        for(std::size_t i = 0; i < size; i++){
+            TreeNode* node = queue.front();
+            queue.pop();
+            if(node->left) queue.push(node->left);
+            if(node->right) queue.push(node->right);
+            if(!node->left&&!node->right)
+                return minDepth;
+        }
+    }
+    return minDepth;
+}
+
 
 //===================      111. Minimum Depth of Binary Tre    ============================
 // Given a binary tree, determine if it is height-balanced.

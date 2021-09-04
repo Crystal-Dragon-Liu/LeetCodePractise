@@ -50,7 +50,13 @@ class Solution
             std::vector<std::vector<int>>       levelOrder(TreeNode* root);
             // easy 104. Maximum Depth of Binary Tree
             int                                 maxDepth(TreeNode* root);
+            int                                 maxDepthPostOrder(TreeNode* root);
             int                                 maxDepthLevelOrder(TreeNode* root);
+            // 559. Maximum Depth of N-ary Tree
+            int                                 maxDepth(NTree::Node* root);
+
+            
+
             // easy 101. Symmetric Tree
             bool                                isSymmetric(TreeNode* root);
             bool                                check(TreeNode* p, TreeNode* q);
@@ -82,6 +88,9 @@ class Solution
             int                                 numTrees(int n);
             // easy 111. Minimum Depth of Binary Tre
             int                                 minDepth(TreeNode* root);
+            int                                 minDepthRecursive(TreeNode* root);
+            int                                 minDepthIterator(TreeNode* root);
+
             // easy 111. is balanced.
             bool                                isBalanced(TreeNode* root);
             int                                 height(TreeNode* root);

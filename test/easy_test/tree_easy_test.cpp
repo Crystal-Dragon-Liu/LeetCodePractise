@@ -17,6 +17,7 @@ TEST(TreeEasyTest, DISABLED_Test1)
     TreeNode* root_right_node = new TreeNode(20, nullptr, nullptr);
     TreeNode* root_right_left_node = new TreeNode(15, nullptr, nullptr);
     TreeNode* root_right_right_node = new TreeNode(7, nullptr, nullptr);
+    
 
     root->left = root_left_node;
     root_right_node->left = root_right_left_node;

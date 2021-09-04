@@ -757,3 +757,67 @@ std::string     Solution::longestPalindrome(std::string s)
     lpd = s.substr(begin, max);
     return lpd;
 }
+//=========================================================================================
+// ? 222. Count Complete Tree Nodes
+// Given the root of a complete binary tree, return the number of the nodes in the tree.
+
+// According to Wikipedia, every level, except possibly the last,
+// is completely filled in a complete binary tree, and all nodes in the last level are 
+// as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
+
+// Design an algorithm that runs in less than O(n) time complexity.
+//=========================================================================================
+int  Solution::countNodes(TreeNode* root){
+    return countNodesIteratorNormal(root);
+}
+
+
+int  Solution::countNodesIteratorNormal(TreeNode* root)
+{
+    if(!root) return 0;
+    std::queue<TreeNode*> queue;
+    queue.push(root);
+    int result = 0;
+    while(!queue.empty()){
+        std::size_t size = queue.size();
+        for(std::size_t i = 0; i < size; i++){
+            TreeNode* node = queue.front();
+            queue.pop(); 
+            result++;
+            if(node->left)
+                queue.push(node->left);
+            if(node->right)
+                queue.push(node->right);
+        }
+    }
+    return result;
+}
+
+int  Solution::countNodesRecursiveII(TreeNode* root)
+{
+    if(!root) return 0;
+    int leftDepth = 0;
+    int rightDepth = 0;
+    TreeNode* left = root->left;
+    TreeNode* right = root->right;
+    while(left){
+        leftDepth++;
+        left = left->left;
+    }
+    while(right){
+        rightDepth++;
+        right = right->right;
+    }
+    if(leftDepth == rightDepth)
+        // util this layer, the tree could be recognized as a completed binary tree.
+        return  (2 << leftDepth) -1;
+    return countNodesRecursiveII(root->left) + countNodesRecursiveII(root->right) + 1;
+}
+
+int  Solution::countNodesRecursive(TreeNode* root)
+{
+if(!root) return 0;
+    int leftNum = countNodesRecursive(root->left);
+    int rightNum = countNodesRecursive(root->right);
+    return leftNum + rightNum + 1;
+}

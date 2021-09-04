@@ -189,6 +189,12 @@ class Solution
             TreeNode*                           invertTreeIterCommonFront(TreeNode* root);
             TreeNode*                           invertTreeLevelOrder(TreeNode* root);
             int                                 lengthOfLongestSubstring(std::string s);
+            // 222. Count Complete Tree Nodes
+            int                                 countNodesIteratorNormal(TreeNode* root);
+            int                                 countNodes(TreeNode* root);
+            int                                 countNodesRecursive(TreeNode* root);
+            // the version according to properties of complete binary tree.
+            int                                 countNodesRecursiveII(TreeNode* root);
 
     private:
             int                             post_index;

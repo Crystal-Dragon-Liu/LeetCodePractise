@@ -520,3 +520,53 @@ int  Solution::lengthOfLongestSubstring(std::string s){
     return res;
 }
 
+//=========================================================================================
+// ?110. Balanced Binary Tree
+// Given a binary tree, 
+// determine if it is height-balanced.
+// For this problem, 
+// a height-balanced binary tree is defined as:
+// a binary tree in which the left and right subtrees of every node differ 
+// in height by no more than 1.
+//=========================================================================================
+int Solution::isBalancedBinaryTree(TreeNode* root){
+    // if root equal to 0, height is set to 0;
+    if(!root) return 0;
+    int height_left = height(root->left);
+    int height_right = height(root->right);
+    if(height_left == -1)
+        return -1;
+    if(height_right == -1)
+        return -1;
+    return std::abs(height_left - height_right) >1 ? -1:  1 + std::max(height_right, height_left);
+}
+
+int Solution::isBalancedBinaryTreeIter(TreeNode* root){
+    if(!root)
+        return 0;
+    std::stack<TreeNode*> st;
+    st.push(root);
+    int depth = 0;
+    int result = 0;
+    while(!st.empty()){
+        TreeNode* node = st.top();
+        st.pop();
+        if(node){
+            st.push(node);
+            st.push(NULL);
+            depth++;
+            if(node->left)
+                st.push(node->right);
+            if(node->right)
+                st.push(node->left);
+        }
+        else{
+            st.pop();
+            st.pop();
+            depth--;
+        }
+        result = result > depth ? result: depth;
+        // update
+    }
+    return result;
+}

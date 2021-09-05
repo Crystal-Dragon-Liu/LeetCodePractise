@@ -195,6 +195,9 @@ class Solution
             int                                 countNodesRecursive(TreeNode* root);
             // the version according to properties of complete binary tree.
             int                                 countNodesRecursiveII(TreeNode* root);
+            // 110. Balanced Binary Tree
+            int                                 isBalancedBinaryTree(TreeNode* root);  
+            int                                 isBalancedBinaryTreeIter(TreeNode* root);
 
     private:
             int                             post_index;

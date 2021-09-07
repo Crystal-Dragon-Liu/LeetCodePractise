@@ -99,6 +99,7 @@ class Solution
             TreeNode*                           sortedArrayToBSTHelper(std::vector<int> & nums, int left, int right);
             //easy 257. Binary Tree Paths
             std::vector<std::string>            binaryTreePaths(TreeNode* root);
+            std::vector<std::string>            binaryTreePathsIter(TreeNode* root);
             void                                buildPath(TreeNode* root, std::string path, std::vector<std::string>& pathList);
             // normal 95. Unique Binary Search Trees II
             std::vector<TreeNode*>              generateTrees(int n);
@@ -198,6 +199,13 @@ class Solution
             // 110. Balanced Binary Tree
             int                                 isBalancedBinaryTree(TreeNode* root);  
             int                                 isBalancedBinaryTreeIter(TreeNode* root);
+            // 404. Sum of Left Leaves
+            int                                 sumOfLeftLeaves(TreeNode* root);
+            // 513. Find Bottom Left Tree Value
+            int                                 findBottomLeftValue(TreeNode* root);
+            void                                 findBottomLeftValueRecursive(TreeNode* root, int maxLeft);
+
+            
 
     private:
             int                             post_index;
@@ -211,5 +219,9 @@ class Solution
             // 129. path sum
             std::vector<int>               _sumPathSet;
             int                            _sumPath;
+
+            // 513
+            int                            _MaxLeftValue;
+            int                            _MaxDepth;
 };
 #endif

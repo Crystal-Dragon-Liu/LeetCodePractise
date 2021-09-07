@@ -345,6 +345,44 @@ void   Solution::buildPath(TreeNode* root, std::string path, std::vector<std::st
         }
     } 
 }
+
+std::vector<std::string>     Solution::binaryTreePathsIter(TreeNode* root){
+
+    std::vector<std::string> pathSet;
+    std::stack<TreeNode*>    st;
+    std::stack<std::string>  pathStack;
+    if(!root) return pathSet;
+    st.push(root);
+    pathStack.push(std::to_string(root->val));
+    while(!st.empty()){
+        TreeNode* node = st.top();
+        if(node){
+            st.pop();
+            // get the path where there is current node.
+            auto path = pathStack.top(); pathStack.pop();
+            if(!node->right && !node->left)
+                {pathSet.push_back(path);}
+            //front order.
+            if(node->right){
+                st.push(node->right);
+                pathStack.push(path + "->" + std::to_string(node->right->val));
+            }
+            if(node->left){
+                st.push(node->left);
+                pathStack.push(path + "->" + std::to_string(node->left->val));
+            }
+            st.push(node);
+            st.push(NULL);
+        }
+        else{
+            st.pop();
+            // TreeNode* node = st.top();
+            st.pop();
+        }
+    }
+    return pathSet;
+}
+
 //=========================================================================================
 //? 637. Average of Levels in Binary Tree
 // Given the root of a binary tree,
@@ -569,4 +607,87 @@ int Solution::isBalancedBinaryTreeIter(TreeNode* root){
         // update
     }
     return result;
+}
+
+//=========================================================================================
+//? 404. Sum of Left Leaves
+// Given the root of a binary tree, return the sum of all left leaves.
+//=========================================================================================
+int   Solution::sumOfLeftLeaves(TreeNode* root){ 
+    if(!root) return 0;
+    int leftSum = 0;
+    int rightSum = 0;
+    if(root->left && !root->left->left && !root->left->right)
+        leftSum = root->left->val;
+    else leftSum = sumOfLeftLeaves(root->left);
+    rightSum = sumOfLeftLeaves(root->right);
+    return leftSum + rightSum;
+    // if(!root || (!root->left && !root->right)) 
+    //     return 0;
+    // if(root->left && root->right)
+    //     return root->left->val +
+    //      sumOfLeftLeaves(root->left)
+    //       + sumOfLeftLeaves(root->right);
+    // else if(!root->left)
+    //     return sumOfLeftLeaves(root->right);
+    // else 
+    //      return root->left->val +
+    //      sumOfLeftLeaves(root->left);
+}
+
+//=========================================================================================
+//? 513. Find Bottom Left Tree Value
+// Given the root of a binary tree, return the leftmost value in the last row of the tree.
+//=========================================================================================
+int   Solution::findBottomLeftValue(TreeNode* root)
+{
+    // if(!root) return 0;
+    // std::queue<TreeNode*> q;
+    // q.push(root);
+    // int leftValue;
+    // while(!q.empty()){
+    //     std::size_t size = q.size();
+    //     for(std::size_t i = 0; i < size; i++){
+    //         TreeNode* node = q.front();
+    //         if(i == 0)
+    //             leftValue = node->val;
+    //         q.pop();
+    //         if(node->left)
+    //             q.push(node->left);
+    //         if(node->right)
+    //             q.push(node->right);
+    //     }
+    // }
+    // return leftValue;
+    _MaxDepth = INT32_MIN;
+    findBottomLeftValueRecursive(root, 0);
+    return _MaxLeftValue;
+}
+
+void   Solution::findBottomLeftValueRecursive(TreeNode* root, int maxDepth){
+    // firstly we should find the deepst layer, and then 
+    // the first left node should be detected.
+
+    if(root->left){
+        maxDepth++;
+        findBottomLeftValueRecursive(root->left, maxDepth);
+        maxDepth--;
+    }
+if(!root->left && !root->right){
+    if(maxDepth > _MaxDepth){
+            _MaxDepth = maxDepth;
+            _MaxLeftValue = root->val;
+        }
+        return;
+    }
+
+
+    if(root->right){
+        maxDepth++;
+        findBottomLeftValueRecursive(root->right, maxDepth);
+        maxDepth--;
+    }
+
+    
+    return;
 }

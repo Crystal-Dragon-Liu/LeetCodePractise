@@ -36,7 +36,7 @@ TEST(TreeEasyTest, DISABLED_Test1)
     delete root_right_left_node;
 }
 
-TEST(TreeEasyTest, Test2)
+TEST(TreeEasyTest, DISABLED_Test2)
 {
      //initialize a TreeNode List.
     TreeNode* root = new TreeNode(3, nullptr, nullptr);
@@ -61,7 +61,7 @@ TEST(TreeEasyTest, Test2)
     delete root_right_left_node;
 }
 
-TEST(TreeEasyTest, Test3)
+TEST(TreeEasyTest, DISABLED_Test3)
 {
      //initialize a TreeNode List.
     TreeNode* root = new TreeNode(3, nullptr, nullptr);
@@ -82,6 +82,117 @@ TEST(TreeEasyTest, Test3)
     delete root;
     delete root_left_node;
     delete root_right_node;
+    delete root_right_right_node;
+    delete root_right_left_node;
+}
+
+TEST(TreeEasyTest, DISABLED_BinaryTreePathTest)
+{
+    //initialize a TreeNode List.
+    TreeNode* root = new TreeNode(1, nullptr, nullptr);
+    // left1, right1
+    TreeNode* root_left_node = new TreeNode(2, nullptr, nullptr);
+    TreeNode* root_right_node = new TreeNode(3, nullptr, nullptr);
+    // left2, right2
+    TreeNode* root_left_left_node = new TreeNode(4, nullptr, nullptr);
+    TreeNode* root_left_right_node = new TreeNode(5, nullptr, nullptr);
+    TreeNode* root_right_left_node = new TreeNode(6, nullptr, nullptr);
+    TreeNode* root_right_right_node = new TreeNode(7, nullptr, nullptr);
+
+    root->left = root_left_node;
+    root->right = root_right_node;
+    root_left_node->left = root_left_left_node;
+    root_left_node->right = root_left_right_node;
+    root_right_node->left = root_right_left_node;
+    root_right_node->right = root_right_right_node;
+
+
+    //-----------------------------------------------------------------
+    Solution so;
+    std::vector<std::string> result = so.binaryTreePathsIter(root);
+    for(std::size_t i = 0; i < result.size(); i++)
+        std::cout << "path: " << result[i] << std::endl;
+
+
+    //-----------------------------------------------------------------
+    // delete nodes.
+    delete root;
+    delete root_left_node;
+    delete root_right_node;
+    delete root_left_left_node;
+    delete root_left_right_node;
+    delete root_right_right_node;
+    delete root_right_left_node;
+}
+
+TEST(TreeEasyTest, DISABLED_sumOfLeftLeavesTest)
+{
+    //initialize a TreeNode List.
+    TreeNode* root = new TreeNode(1, nullptr, nullptr);
+    // left1, right1
+    TreeNode* root_left_node = new TreeNode(2, nullptr, nullptr);
+    TreeNode* root_right_node = new TreeNode(3, nullptr, nullptr);
+    // left2, right2
+    TreeNode* root_left_left_node = new TreeNode(4, nullptr, nullptr);
+    TreeNode* root_left_right_node = new TreeNode(5, nullptr, nullptr);
+    TreeNode* root_right_left_node = new TreeNode(6, nullptr, nullptr);
+    TreeNode* root_right_right_node = new TreeNode(7, nullptr, nullptr);
+
+    root->left = root_left_node;
+    root->right = root_right_node;
+    root_left_node->left = root_left_left_node;
+    root_left_node->right = root_left_right_node;
+    // root_right_node->left = root_right_left_node;
+    // root_right_node->right = root_right_right_node;
+
+
+    //-----------------------------------------------------------------
+    Solution so;
+    int sum = so.sumOfLeftLeaves(root);
+    std::cout << sum << std::endl;
+    //-----------------------------------------------------------------
+    // delete nodes.
+    delete root;
+    delete root_left_node;
+    delete root_right_node;
+    delete root_left_left_node;
+    delete root_left_right_node;
+    delete root_right_right_node;
+    delete root_right_left_node;
+}
+
+TEST(TreeEasyTest, findBottomLeftValueTest)
+{
+    //initialize a TreeNode List.
+    TreeNode* root = new TreeNode(1, nullptr, nullptr);
+    // left1, right1
+    TreeNode* root_left_node = new TreeNode(2, nullptr, nullptr);
+    TreeNode* root_right_node = new TreeNode(3, nullptr, nullptr);
+    // left2, right2
+    TreeNode* root_left_left_node = new TreeNode(4, nullptr, nullptr);
+    TreeNode* root_left_right_node = new TreeNode(5, nullptr, nullptr);
+    TreeNode* root_right_left_node = new TreeNode(6, nullptr, nullptr);
+    TreeNode* root_right_right_node = new TreeNode(7, nullptr, nullptr);
+
+    root->left = root_left_node;
+    root->right = root_right_node;
+    root_left_node->left = root_left_left_node;
+    root_left_node->right = root_left_right_node;
+    // root_right_node->left = root_right_left_node;
+    // root_right_node->right = root_right_right_node;
+
+
+    //-----------------------------------------------------------------
+    Solution so;
+    int leftValue = so.findBottomLeftValue(root);
+    std::cout << leftValue << std::endl;
+    //-----------------------------------------------------------------
+    // delete nodes.
+    delete root;
+    delete root_left_node;
+    delete root_right_node;
+    delete root_left_left_node;
+    delete root_left_right_node;
     delete root_right_right_node;
     delete root_right_left_node;
 }

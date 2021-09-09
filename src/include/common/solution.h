@@ -120,6 +120,9 @@ class Solution
             ListNode*                           findMedianNode(ListNode* left, ListNode* right);
             // normal 113. Path Sum II
             std::vector<std::vector<int>>       pathSum(TreeNode* root, int targetSum);
+            std::vector<std::vector<int>>       pathSumII(TreeNode* root, int targetSum);
+            void                                pathSumIIHelperRecursive(TreeNode* root, 
+                                                        std::vector<int>& path, std::vector<std::vector<int>>& result, int count);
             // easy 112. Path Sum
             bool                                hasPathSumI(TreeNode* root, int targetSum);
             bool                                hasPathSumHelper(TreeNode* root, int count);

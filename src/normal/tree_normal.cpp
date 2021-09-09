@@ -521,6 +521,34 @@ void                     Solution::dfsPathSum(TreeNode* root, int targetSum)
     _path.pop_back(); // means that after the end of call of this method, path should be reset.
 }
 
+std::vector<std::vector<int>>       Solution::pathSumII(TreeNode* root, int targetSum){
+    std::vector<std::vector<int>> result;
+    if(!root) return result;
+    std::vector<int> pathTemp;
+    pathTemp.push_back(root->val);
+    pathSumIIHelperRecursive(root, pathTemp, result, targetSum- root->val);
+    return result;
+}
+void                                Solution::pathSumIIHelperRecursive(TreeNode* root, 
+                                                        std::vector<int>& path, std::vector<std::vector<int>>& result, int count)
+{
+    if(!root->left && !root->right &&  count == 0){
+        result.push_back(path);
+    }
+    if(root->left){
+        path.push_back(root->left->val);
+        pathSumIIHelperRecursive(root->left, path, result, count - root->left->val);
+        path.pop_back();
+    }
+    if(root->right){
+        path.push_back(root->right->val);
+        pathSumIIHelperRecursive(root->right, path, result, count - root->right->val);
+        path.pop_back();
+    }
+}
+
+
+
 //=========================================================================================
 // ? 114. Flatten Binary Tree to Linked List
 // Given the root of a binary tree, flatten the tree into a "linked list":

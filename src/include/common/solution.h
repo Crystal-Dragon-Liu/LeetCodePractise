@@ -120,6 +120,11 @@ class Solution
             ListNode*                           findMedianNode(ListNode* left, ListNode* right);
             // normal 113. Path Sum II
             std::vector<std::vector<int>>       pathSum(TreeNode* root, int targetSum);
+            // easy 112. Path Sum
+            bool                                hasPathSumI(TreeNode* root, int targetSum);
+            bool                                hasPathSumHelper(TreeNode* root, int count);
+            bool                                hasPathSumHelperIter(TreeNode* root, int count);
+
             void                                dfsPathSum(TreeNode* root, int targetSum);
             // normal 114. Flatten Binary Tree to Linked List
             void                                flatten(TreeNode* root);
@@ -203,7 +208,7 @@ class Solution
             int                                 sumOfLeftLeaves(TreeNode* root);
             // 513. Find Bottom Left Tree Value
             int                                 findBottomLeftValue(TreeNode* root);
-            void                                 findBottomLeftValueRecursive(TreeNode* root, int maxLeft);
+            void                                findBottomLeftValueRecursive(TreeNode* root, int maxLeft);
 
             
 

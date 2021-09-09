@@ -161,7 +161,7 @@ TEST(TreeEasyTest, DISABLED_sumOfLeftLeavesTest)
     delete root_right_left_node;
 }
 
-TEST(TreeEasyTest, findBottomLeftValueTest)
+TEST(TreeEasyTest, DISABLED_findBottomLeftValueTest)
 {
     //initialize a TreeNode List.
     TreeNode* root = new TreeNode(1, nullptr, nullptr);
@@ -185,6 +185,43 @@ TEST(TreeEasyTest, findBottomLeftValueTest)
     //-----------------------------------------------------------------
     Solution so;
     int leftValue = so.findBottomLeftValue(root);
+    std::cout << leftValue << std::endl;
+    //-----------------------------------------------------------------
+    // delete nodes.
+    delete root;
+    delete root_left_node;
+    delete root_right_node;
+    delete root_left_left_node;
+    delete root_left_right_node;
+    delete root_right_right_node;
+    delete root_right_left_node;
+}
+
+
+TEST(TreeEasyTest, hasPathSumITest)
+{
+    //initialize a TreeNode List.
+    TreeNode* root = new TreeNode(1, nullptr, nullptr);
+    // left1, right1
+    TreeNode* root_left_node = new TreeNode(2, nullptr, nullptr);
+    TreeNode* root_right_node = new TreeNode(3, nullptr, nullptr);
+    // left2, right2
+    TreeNode* root_left_left_node = new TreeNode(4, nullptr, nullptr);
+    TreeNode* root_left_right_node = new TreeNode(5, nullptr, nullptr);
+    TreeNode* root_right_left_node = new TreeNode(6, nullptr, nullptr);
+    TreeNode* root_right_right_node = new TreeNode(7, nullptr, nullptr);
+
+    root->left = root_left_node;
+    root->right = root_right_node;
+    root_left_node->left = root_left_left_node;
+    root_left_node->right = root_left_right_node;
+    root_right_node->left = root_right_left_node;
+    root_right_node->right = root_right_right_node;
+
+
+    //-----------------------------------------------------------------
+    Solution so;
+    bool leftValue = so.hasPathSumI(root, 7);
     std::cout << leftValue << std::endl;
     //-----------------------------------------------------------------
     // delete nodes.

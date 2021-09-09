@@ -673,21 +673,56 @@ void   Solution::findBottomLeftValueRecursive(TreeNode* root, int maxDepth){
         findBottomLeftValueRecursive(root->left, maxDepth);
         maxDepth--;
     }
-if(!root->left && !root->right){
+    if(!root->left && !root->right){
     if(maxDepth > _MaxDepth){
             _MaxDepth = maxDepth;
             _MaxLeftValue = root->val;
         }
         return;
     }
-
-
     if(root->right){
         maxDepth++;
         findBottomLeftValueRecursive(root->right, maxDepth);
         maxDepth--;
     }
-
-    
     return;
+}
+
+//=========================================================================================
+// ? 112. Path Sum
+// Given the root of a binary tree and an integer targetSum, 
+// return true if the tree has a root-to-leaf path 
+// such that adding up all the values along the path equals targetSum.
+// A leaf is a node with no children.
+//=========================================================================================
+bool   Solution::hasPathSumI(TreeNode* root, int targetSum){
+    return hasPathSumHelper(root, targetSum);
+}
+bool  Solution::hasPathSumHelper(TreeNode* root, int count){
+    if(!root) return false;
+    if(!root->left && !root->right && count - root->val == 0)
+        return true;
+    bool left = hasPathSumHelper(root->left, count - root->val);
+    bool right  = hasPathSumHelper(root->right, count - root->val);
+    return left || right;
+}
+
+bool  Solution::hasPathSumHelperIter(TreeNode* root, int count)
+{
+    if(!root) return false;
+    std::stack<std::pair<TreeNode*, int> > st;
+    st.push(std::make_pair(root, count - root->val));
+    while(!st.empty()){
+        auto node_pair = st.top();
+        st.pop();
+        if(!node_pair.first->left && !node_pair.first->right && node_pair.second == 0)
+            return true;
+        if(node_pair.first->right)
+            st.push(std::make_pair(node_pair.first->right,
+                node_pair.second - node_pair.first->right->val));
+        if(node_pair.first->left)
+            st.push(std::make_pair(node_pair.first->left, 
+                node_pair.second - node_pair.first->left->val));
+    }
+    return false;
 }

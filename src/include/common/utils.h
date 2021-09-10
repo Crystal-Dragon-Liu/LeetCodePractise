@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include "common/config.h"
-
+#include <memory>
 //   Definition for singly-linked list.
   struct ListNode {
       int val;

@@ -181,6 +181,72 @@ TreeNode* Solution::buildTree(std::vector<int>& inorder, std::vector<int>& posto
     return helper(0, post_index, inorder, postorder);
 }
 
+TreeNode* Solution::buildTreeV2(std::vector<int>& inorder, std::vector<int>& postorder){
+    // the last element of  postorder vec must be the root of tree.
+    if(inorder.size() || postorder.size())
+        return nullptr;
+    // split the postorder.
+    // int root_value = postorder.back();
+    // TreeNode* root = new TreeNode(root_value);
+    // int index =0;
+    // for(int i = 0; i < inorder.size(); i++)
+    //     if(inorder[i] == root_value){
+    //         index = i;
+    //         break;
+    //     }
+    // root->left = buildTreeV2Helper(inorder, postorder);
+    // root->right = buildTreeV2Helper(inorder, postorder);
+    return buildTreeV2Helper(inorder, postorder, 0, postorder.size(), 0, inorder.size());
+}
+
+TreeNode*   Solution::buildTreeV2Helper(const std::vector<int>& inorder, 
+            const std::vector<int>& postorder, 
+            int postorder_left, 
+            int postorder_right, 
+            int inorder_left, 
+            int inorder_right)
+{
+    // split the postorder.
+    int root_value = postorder[postorder_right - 1];
+    // SharedTreeNode::TreeNode root;
+    TreeNode* root = new TreeNode(root_value);
+    _TreeNodeVec.push_back(root);
+    int index =0;
+    for(int i = inorder_left; i < inorder_right; i++)
+        if(inorder[i] == root_value){
+            index = i; // 1
+            break;
+        }
+    int left_new_inorder_left = inorder_left; // 0
+    int left_new_inorder_right = index; // 1
+
+    int right_new_inorder_left = index+1; // 2
+    int right_new_inorder_right = inorder_right; // 5
+
+    int inorder_left_size = index - inorder_left ; // 1
+    int inorder_right_size = inorder_right - index - 1; // 5 - 1 - 1 = 3
+
+    int left_new_postorder_left = postorder_left; // 0 
+    int left_new_postorder_right = postorder_left + inorder_left_size; //0 + 1 = 1
+
+    int right_new_postorder_left = left_new_postorder_right + 1; // 2
+    int right_new_postorder_right = right_new_postorder_left + inorder_right_size; // 2 + 3 - 1 = 4
+    
+    
+    
+    root->left = buildTreeV2Helper(inorder, postorder, 
+                    left_new_postorder_left, 
+                    left_new_postorder_right, 
+                    left_new_inorder_left, 
+                    left_new_inorder_right);
+    root->right = buildTreeV2Helper(inorder, postorder, 
+                    right_new_postorder_left, 
+                    right_new_postorder_right, 
+                    right_new_inorder_left, 
+                    right_new_inorder_right);
+    return root;
+}
+
 TreeNode* Solution::helper(int start, int end, std::vector<int>& inorder, std::vector<int>& postorder)
 {
     if(start > end) {return nullptr;}

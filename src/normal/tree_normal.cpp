@@ -250,6 +250,67 @@ TreeNode*   Solution::buildTreeV2Helper(const std::vector<int>& inorder,
     return root;
 }
 
+// ? 105. Construct Binary Tree from Preorder and Inorder Traversal
+/*
+    
+    Given two integer arrays preorder and inorder 
+    where preorder is the preorder traversal of a binary tree 
+    and inorder is the inorder traversal of the same tree, 
+    construct and return the binary tree.
+*/
+
+TreeNode*   Solution::buildTreeV3(std::vector<int>& preorder, std::vector<int>& inorder)
+{
+    if(preorder.size() == 0 || inorder.size() == 0)
+        return nullptr;
+    return buildTreeV3Helper(preorder, inorder, 0, preorder.size(), 0, inorder.size());
+}
+
+TreeNode*   Solution::buildTreeV3Helper(std::vector<int>& preorder, 
+std::vector<int>& inorder, int preorder_left, int preorder_right,int inorder_left, int inorder_right)
+{
+    // if(preorder_left == preorder_right) return nullptr;
+    int root_value = preorder[preorder_left];
+    TreeNode* root = new TreeNode(root_value);
+    _TreeNodeVec.push_back(root);
+    if(preorder_right - preorder_left == 1) return root;
+    std::cout << "============= root: " << root_value << " detected ===============" << std::endl;
+    int index =0;
+    for(int i = inorder_left; i < inorder_right; i++)
+        if(inorder[i] == root_value){
+            index = i; // 1
+            break;
+        }
+    // inorder 
+    int left_new_inorder_left   = inorder_left;
+    int left_new_inorder_right  = index;
+    int right_new_inorder_left  = index+1;
+    int right_new_inorder_right = inorder_right;
+    // preorder
+    int inorder_left_size       = index - inorder_left ; // 1
+    // int inorder_right_size      = inorder_right - index - 1; // 5 - 1 - 1 = 3
+    int left_new_preorder_left  = preorder_left + 1; // 0
+    int left_new_preorder_right = left_new_preorder_left + inorder_left_size; // 0 + 1 + 1 = 2
+    int right_new_preorder_left = left_new_preorder_right; // 2
+    int right_new_preorder_right = preorder_right; // 5
+
+    std::cout << left_new_inorder_left << std::endl;
+    std::cout << left_new_inorder_right << std::endl;
+    std::cout << right_new_inorder_left << std::endl;
+    std::cout << right_new_inorder_right << std::endl;
+    std::cout << left_new_preorder_left << std::endl;
+    std::cout << left_new_preorder_right << std::endl;
+    std::cout << right_new_preorder_left << std::endl;
+    std::cout << right_new_preorder_right << std::endl;
+    if(left_new_preorder_left != left_new_preorder_right)
+        root->left = buildTreeV3Helper(preorder, inorder, left_new_preorder_left, left_new_preorder_right,
+            left_new_inorder_left, left_new_inorder_right);
+    if(right_new_preorder_right != left_new_preorder_left)
+        root->right = buildTreeV3Helper(preorder, inorder, right_new_preorder_left, right_new_preorder_right,
+            right_new_inorder_left, right_new_inorder_right);
+    return root;
+}
+
 TreeNode* Solution::helper(int start, int end, std::vector<int>& inorder, std::vector<int>& postorder)
 {
     if(start > end) {return nullptr;}
@@ -918,3 +979,4 @@ if(!root) return 0;
     int rightNum = countNodesRecursive(root->right);
     return leftNum + rightNum + 1;
 }
+

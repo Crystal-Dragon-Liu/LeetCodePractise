@@ -179,7 +179,7 @@ TEST(TreeNormalTest, DISABLED_Test8)
     std::cout << result << std::endl;
 }
 
-TEST(TreeNormalTest, buildTreeV2Test){
+TEST(TreeNormalTest, DISABLED_buildTreeV2Test){
     std::vector<int> inorder{2, 1};
     std::vector<int> postorder{2, 1};
     Solution solu;
@@ -192,3 +192,17 @@ TEST(TreeNormalTest, buildTreeV2Test){
     std::cout << "delete nodes....." << std::endl;
     for(std::size_t i = 0; i < size; i++){delete solu._TreeNodeVec[i];}
 }
+
+TEST(TreeNormalTest, buildTreeV3Test){
+    std::vector<int> preorder{3,9,20,15,7};
+    std::vector<int> inorder{9,3,15,20,7};
+    Solution solu;
+    TreeNode* root = solu.buildTreeV3(preorder, inorder);
+    auto result = solu.preorderTraversal(root);
+    std::cout << "=========== result: ===========" << std::endl;
+    for(std::size_t i = 0; i < result.size(); i++) { std::cout << result[i] << ", ";}
+    std::cout << std::endl;
+    std::size_t size = solu._TreeNodeVec.size();
+    std::cout << "delete nodes....." << std::endl;
+    for(std::size_t i = 0; i < size; i++){delete solu._TreeNodeVec[i];}
+}   

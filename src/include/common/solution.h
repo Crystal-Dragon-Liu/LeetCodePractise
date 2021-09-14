@@ -78,6 +78,13 @@ class Solution
             TreeNode*                           helper(int in_left, int in_right, std::vector<int>& in_order, std::vector<int>& post_order);
             TreeNode*                           buildTreePreorderAndInorder(std::vector<int>& inorder, std::vector<int>& postorder);
             TreeNode*                           helperv2(const std::vector<int>& preorder, const std::vector<int>& inorder, int preorder_left, int preorder_right, int inorder_left, int inorder_right);
+
+            // 105. Construct Binary Tree from Preorder and Inorder Traversal
+            TreeNode*                           buildTreeV3(std::vector<int>& preorder, std::vector<int>& inorder);
+            TreeNode*                           buildTreeV3Helper(std::vector<int>& preorder, 
+            std::vector<int>& inorder,
+            int preorder_left, int preorder_right,
+            int inorder_left, int inorder_right);
             // normal 116. Populating Next Right Pointers in Each Node
             LabFor116::Node*                    connect(LabFor116::Node* root);
             // normal 117. Populating Next Right Pointers in Each Node II                                
@@ -221,7 +228,7 @@ class Solution
             // 513. Find Bottom Left Tree Value
             int                                 findBottomLeftValue(TreeNode* root);
             void                                findBottomLeftValueRecursive(TreeNode* root, int maxLeft);
-
+            // 105.
             
 
     private:

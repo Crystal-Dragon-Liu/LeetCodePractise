@@ -171,10 +171,24 @@ TEST(TreeNormalTest, DISABLED_Test7)
     std::cout << result << std::endl;
 }
 
-TEST(TreeNormalTest, Test8)
+TEST(TreeNormalTest, DISABLED_Test8)
 {
     std::string s("babad");
     Solution solu;
     std::string result = solu.longestPalindrome(s);
     std::cout << result << std::endl;
+}
+
+TEST(TreeNormalTest, buildTreeV2Test){
+    std::vector<int> inorder{2, 1};
+    std::vector<int> postorder{2, 1};
+    Solution solu;
+    TreeNode* root = solu.buildTreeV2(inorder, postorder);
+    auto result = solu.inorderTraversal(root);
+    std::cout << "=========== result: ===========" << std::endl;
+    for(std::size_t i = 0; i < result.size(); i++) { std::cout << result[i] << ", ";}
+    std::cout << std::endl;
+    std::size_t size = solu._TreeNodeVec.size();
+    std::cout << "delete nodes....." << std::endl;
+    for(std::size_t i = 0; i < size; i++){delete solu._TreeNodeVec[i];}
 }

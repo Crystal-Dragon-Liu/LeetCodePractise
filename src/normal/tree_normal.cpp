@@ -183,7 +183,7 @@ TreeNode* Solution::buildTree(std::vector<int>& inorder, std::vector<int>& posto
 
 TreeNode* Solution::buildTreeV2(std::vector<int>& inorder, std::vector<int>& postorder){
     // the last element of  postorder vec must be the root of tree.
-    if(inorder.size() || postorder.size())
+    if(inorder.size() == 0 || postorder.size() == 0)
         return nullptr;
     // split the postorder.
     // int root_value = postorder.back();
@@ -217,6 +217,7 @@ TreeNode*   Solution::buildTreeV2Helper(const std::vector<int>& inorder,
             index = i; // 1
             break;
         }
+    std::cout << "============= root: " << root_value << " detected ===============" << std::endl;
     int left_new_inorder_left = inorder_left; // 0
     int left_new_inorder_right = index; // 1
 
@@ -229,21 +230,23 @@ TreeNode*   Solution::buildTreeV2Helper(const std::vector<int>& inorder,
     int left_new_postorder_left = postorder_left; // 0 
     int left_new_postorder_right = postorder_left + inorder_left_size; //0 + 1 = 1
 
-    int right_new_postorder_left = left_new_postorder_right + 1; // 2
+    int right_new_postorder_left = left_new_postorder_right; // 2
     int right_new_postorder_right = right_new_postorder_left + inorder_right_size; // 2 + 3 - 1 = 4
-    
-    
-    
-    root->left = buildTreeV2Helper(inorder, postorder, 
-                    left_new_postorder_left, 
-                    left_new_postorder_right, 
-                    left_new_inorder_left, 
-                    left_new_inorder_right);
-    root->right = buildTreeV2Helper(inorder, postorder, 
+
+    if(right_new_inorder_left != right_new_inorder_right 
+        && right_new_postorder_right != right_new_postorder_left)
+        root->right = buildTreeV2Helper(inorder, postorder, 
                     right_new_postorder_left, 
                     right_new_postorder_right, 
                     right_new_inorder_left, 
                     right_new_inorder_right);
+    if(left_new_postorder_left != left_new_postorder_right
+        && left_new_inorder_left != left_new_inorder_right)
+        root->left = buildTreeV2Helper(inorder, postorder, 
+                    left_new_postorder_left, 
+                    left_new_postorder_right, 
+                    left_new_inorder_left, 
+                    left_new_inorder_right);
     return root;
 }
 

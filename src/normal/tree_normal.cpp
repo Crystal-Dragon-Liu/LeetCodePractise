@@ -980,3 +980,43 @@ if(!root) return 0;
     return leftNum + rightNum + 1;
 }
 
+//? 654. Maximum Binary Tree
+/*
+    You are given an integer array nums with no duplicates. 
+    A maximum binary tree can be built recursively from nums using the following algorithm:
+    Create a root node whose value is the maximum value in nums.
+    Recursively build the left subtree on the subarray prefix to the left of the maximum value.
+    Recursively build the right subtree on the subarray suffix to the right of the maximum value.
+    Return the maximum binary tree built from nums.
+*/
+TreeNode* Solution::constructMaximumBinaryTree(std::vector<int>& nums){
+    return constructMaximumBinaryTreeHelper(nums, 0, nums.size());
+}
+
+TreeNode* Solution::constructMaximumBinaryTreeHelper(std::vector<int>& nums, std::size_t start, std::size_t end){
+       // if nums'size == 1, we should return a TreeNode ptr as leaf.
+    TreeNode* root = new TreeNode(0);
+    _TreeNodeVec.push_back(root);
+    if(end - start == 1){
+        root->val = nums[start];
+        return root;
+    }
+    // find out the maximum value in nums.
+    // and reassignment for root->val and search val's index.
+    std::size_t max_index = 0;
+    std::size_t max_val = 0;
+    for(std::size_t i = start; i < end; i++){
+        if(max_val < static_cast<std::size_t>(nums[i])){
+            max_index = i;
+            max_val = nums[i];
+        }
+    }
+    //[2, 1]
+    //  index 0 2 q
+    root->val = max_val;
+    if(max_index > start)
+        root->left = constructMaximumBinaryTreeHelper(nums, start, max_index);
+    if(max_index + 1 < end)
+        root->right = constructMaximumBinaryTreeHelper(nums, max_index + 1, end);
+    return root;
+}

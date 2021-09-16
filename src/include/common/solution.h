@@ -228,8 +228,16 @@ class Solution
             // 513. Find Bottom Left Tree Value
             int                                 findBottomLeftValue(TreeNode* root);
             void                                findBottomLeftValueRecursive(TreeNode* root, int maxLeft);
-            // 105.
+            // 654. Maximum Binary Tree
+            TreeNode*                           constructMaximumBinaryTree(std::vector<int>& nums);
+            TreeNode*                           constructMaximumBinaryTreeHelper(std::vector<int>& nums, std::size_t start, std::size_t end);
             
+            // delete all the TreeNode ptr.
+            void                                clearTreeNodes(){
+                        std::size_t size = _TreeNodeVec.size();
+                        std::cout << "delete nodes....." << std::endl;
+                        for(std::size_t i = 0; i < size; i++){delete _TreeNodeVec[i];}
+            }
 
     private:
             int                             post_index;

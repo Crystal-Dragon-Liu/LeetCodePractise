@@ -235,6 +235,10 @@ class Solution
             // 617. Merge Two Binary Trees
             TreeNode*                           mergeTrees(TreeNode* root1, TreeNode* root2);
 
+            // 700. Search in a Binary Search Tree
+            TreeNode*                           searchBST(TreeNode* root, int val);
+
+
 
             // delete all the TreeNode ptr.
             void                                clearTreeNodes(){

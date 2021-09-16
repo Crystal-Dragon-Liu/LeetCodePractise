@@ -1052,3 +1052,19 @@ TreeNode*  Solution::mergeTrees(TreeNode* root1, TreeNode* root2){
     root1->right = mergeTrees(root1->right, root2->right);
     return root1;
 }
+
+//? 700. Search in a Binary Search Tree
+/*
+You are given the root of a binary search tree (BST) and an integer val.
+Find the node in the BST that the node's value equals val
+and return the subtree rooted with that node. 
+If such a node does not exist, return null.
+*/
+TreeNode*  Solution::searchBST(TreeNode* root, int val){
+    if(!root || root->val == val) return root;
+    if(root->val > val) return searchBST(root->left, val);
+    else
+        return searchBST(root->right, val);
+}
+
+

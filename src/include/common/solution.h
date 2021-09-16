@@ -232,6 +232,10 @@ class Solution
             TreeNode*                           constructMaximumBinaryTree(std::vector<int>& nums);
             TreeNode*                           constructMaximumBinaryTreeHelper(std::vector<int>& nums, std::size_t start, std::size_t end);
             
+            // 617. Merge Two Binary Trees
+            TreeNode*                           mergeTrees(TreeNode* root1, TreeNode* root2);
+
+
             // delete all the TreeNode ptr.
             void                                clearTreeNodes(){
                         std::size_t size = _TreeNodeVec.size();

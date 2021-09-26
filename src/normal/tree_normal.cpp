@@ -542,7 +542,16 @@ void Solution::searchTreeAndRecover(TreeNode* node, int& count, int x, int y)
 
 bool Solution::isValidBST(TreeNode* root)
 {
-    return isValidBSTHelper(root, -99999, 99999);
+    // return isValidBSTHelper(root, -99999, 99999);
+    std::vector<int> helperVec;
+    if(!root) return true;
+    isValidBSTHelper(root, helperVec);
+    // process helperVec
+    for(std::size_t i = 1; i < helperVec.size(); i++){
+        if(helperVec[i] <= helperVec[i - 1])
+            return false;
+    }
+    return true;
 }
 
 bool Solution::isValidBSTHelper(TreeNode* root, long long left, long long right)
@@ -553,6 +562,14 @@ bool Solution::isValidBSTHelper(TreeNode* root, long long left, long long right)
     return isValidBSTHelper(root->left, left, root->val) && isValidBSTHelper(root->right, root->val, right);
     
 }
+
+void   Solution::isValidBSTHelper(TreeNode* root, std::vector<int>& helperVec){
+    if(!root) return;
+    isValidBSTHelper(root->left, helperVec);
+    helperVec.push_back(root->val);
+    isValidBSTHelper(root->right, helperVec);
+}
+
 
 //=========================================================================================
 // ? 107. Binary Tree Level Order Traversal II
@@ -1067,4 +1084,15 @@ TreeNode*  Solution::searchBST(TreeNode* root, int val){
         return searchBST(root->right, val);
 }
 
+TreeNode*   Solution::searchBSTIter(TreeNode* root, int val){
 
+    while(root){
+        if(val == root->val){
+            return root;
+        }
+        else if(val < root->val) root = root->left;
+        else root = root->right;
+    }
+    // if there is no TreeNode* whose val is equal to "val".
+    return nullptr;
+}

@@ -198,7 +198,7 @@ TEST(TreeEasyTest, DISABLED_findBottomLeftValueTest)
 }
 
 
-TEST(TreeEasyTest, hasPathSumITest)
+TEST(TreeEasyTest, DISABLED_hasPathSumITest)
 {
     //initialize a TreeNode List.
     TreeNode* root = new TreeNode(1, nullptr, nullptr);
@@ -232,4 +232,18 @@ TEST(TreeEasyTest, hasPathSumITest)
     delete root_left_right_node;
     delete root_right_right_node;
     delete root_right_left_node;
+}
+
+union X{
+    int32_t a;
+    struct{
+        int16_t b;
+        int16_t c;
+    };
+};
+
+TEST(TreeEasyTest, simpleTest){
+    X x;
+    x.a = 0x09202021;
+    printf("%x, %x", x.b, x.c);
 }

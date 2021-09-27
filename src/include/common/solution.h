@@ -129,6 +129,7 @@ class Solution
             bool                                isValidBST(TreeNode* root);
             bool                                isValidBSTHelper(TreeNode*, long long left, long long right);
             void                                isValidBSTHelper(TreeNode* root, std::vector<int>& helperVec);
+            bool                                isValidBSTIterationV1(TreeNode* root);
             // normal 107. Binary Tree Level Order Traversal II
             std::vector<std::vector<int> >      levelOrderBottom(TreeNode* root);
             // normal 109. Convert Sorted List to Binary Search Tree

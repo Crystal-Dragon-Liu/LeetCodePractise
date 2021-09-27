@@ -554,6 +554,31 @@ bool Solution::isValidBST(TreeNode* root)
     return true;
 }
 
+bool    Solution::isValidBSTIterationV1(TreeNode* root)
+{
+    if(!root) return true;
+    std::stack<TreeNode*> st;
+    st.push(root);
+    TreeNode* cur = root;
+    TreeNode* pre = nullptr;
+    while(cur && !st.empty()){
+        if(cur){
+            st.push(cur);
+            cur = cur->left;
+        }
+        else{
+            cur = st.top();
+            st.pop();
+            if(pre != nullptr && pre->val >= cur->val)
+                return false;
+            pre = cur;
+            cur = cur->right;
+        }
+    }
+    return true;
+}
+
+
 bool Solution::isValidBSTHelper(TreeNode* root, long long left, long long right)
 {
     if(root == nullptr) return true;

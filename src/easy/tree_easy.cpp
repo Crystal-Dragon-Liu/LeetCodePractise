@@ -3,7 +3,7 @@
 #include <math.h>
 #include <algorithm>
 #include <stack>
-
+#include <map>
 /*104. Maximum Depth of Binary Tree*/
 /* 
 ** @brief Given the root of a binary tree, return its maximum depth.
@@ -725,4 +725,130 @@ bool  Solution::hasPathSumHelperIter(TreeNode* root, int count)
                 node_pair.second - node_pair.first->left->val));
     }
     return false;
+}
+
+// ? 530. Minimum Absolute Difference in BST
+/*
+    Given the root of a Binary Search Tree (BST), 
+    return the minimum absolute difference 
+    between the values of any two different nodes in the tree.
+*/
+int   Solution::getMinimumDifference(TreeNode* root){
+    // std::vector<int> helperVec;
+    _minValue = INT32_MAX;
+    ans = nullptr;
+    getMinimumDifferenceRecursiveV2(root);
+    // getMinimumDifferenceRecursive(root, helperVec);
+    // for(int i = 1; i < helperVec.size(); i++){
+    //     result = std::min(abs(helperVec[i] - helperVec[i - 1]), result);
+    // }
+    // return result;
+    return _minValue;
+    
+}
+
+void   Solution::getMinimumDifferenceRecursive(TreeNode* root, std::vector<int>& helperVec){
+    if(!root) return;
+    getMinimumDifferenceRecursive(root->left, helperVec);
+    helperVec.push_back(root->val);
+    getMinimumDifferenceRecursive(root->right, helperVec);
+}
+
+void  Solution::getMinimumDifferenceRecursiveV2(TreeNode* root)
+{
+    if(root) return;
+    getMinimumDifferenceRecursiveV2(root->left);
+    if(ans != nullptr)
+        _minValue = std::min(_minValue, std::abs(root->val - ans->val));
+    ans = root;        
+    getMinimumDifferenceRecursiveV2(root->right);
+}
+
+int  Solution::getMinimumDifferenceIteration(TreeNode* root)
+{
+    std::stack<TreeNode*> st;
+    TreeNode* cur = root;
+    TreeNode* pre = nullptr;
+    int result = INT32_MAX;
+    // TreeNode*
+    while(!st.empty() || cur != nullptr){
+        if(cur){
+            st.push(cur);
+            cur = cur->left;
+        }
+        else{
+            cur = st.top();
+            st.pop();
+            if(pre != nullptr){
+                // if(pre->val >= cur->val) return false;
+                result = std::min(result, cur->val - pre->val);
+            }
+            pre = cur;
+            cur = cur->right;
+        }
+    }  
+    return result;
+}
+
+
+// ?501. Find Mode in Binary Search Tree
+/*
+    Given the root of a binary search tree (BST) with duplicates, 
+    return all the mode(s) (i.e., the most frequently occurred element) in it.
+    If the tree has more than one mode, 
+    return them in any order.
+    Assume a BST is defined as follows:
+    The left subtree of a node contains only nodes with keys less than or equal to the node's key.
+    The right subtree of a node contains only nodes with keys greater than or equal to the node's key.
+    Both the left and right subtrees must also be binary search trees.
+*/
+std::vector<int>  Solution::findMode(TreeNode* root){
+    if(!root) return std::vector<int>();
+    std::vector<int> result;
+    std::stack<TreeNode*> st;
+    std::unordered_map<int, int> countMap;
+    TreeNode* cur = root;
+    while(!st.empty() || cur != nullptr){
+        if(cur){
+            st.push(cur);
+            cur = cur->left;
+        }
+        else{
+            cur = st.top();
+            st.pop();
+            auto iter = countMap.find(cur->val);
+            // traversal the node's value.
+            if(iter == countMap.end()){
+                countMap.insert(std::make_pair(cur->val, 1));
+            }
+            else{
+                iter->second += 1;
+            }
+            cur = cur->right;
+        }
+    }
+
+    std::vector<std::pair<int, int>> countVec(countMap.begin(), countMap.end());
+    std::sort(countVec.begin(), countVec.end(), 
+        [](const std::pair<int, int>& a, const std::pair<int, int>& b) -> bool {
+            return a.second > b.second;}
+        );
+    result.push_back(countVec[0].first);
+    // push back the other val whose count is same as the maximum.
+    for(std::size_t i = 1; i < countVec.size(); i++){
+        if(countVec[0].second == countVec[i].second)
+            result.push_back(countVec[i].first);
+        else break;
+    }
+    return result;
+
+    // auto mapIter = countMap.begin();
+    // while(mapIter != countMap.end()){
+    //     std::cout << mapIter->first << " 'count -> " << mapIter->second << std::endl;
+    //     mapIter++;
+    // }
+    // return std::vector<int>();
+}
+
+std::vector<int>  Solution::findModeV2(TreeNode* root){
 }

@@ -197,7 +197,6 @@ TEST(TreeEasyTest, DISABLED_findBottomLeftValueTest)
     delete root_right_left_node;
 }
 
-
 TEST(TreeEasyTest, DISABLED_hasPathSumITest)
 {
     //initialize a TreeNode List.
@@ -242,8 +241,26 @@ union X{
     };
 };
 
-TEST(TreeEasyTest, simpleTest){
+TEST(TreeEasyTest, DISABLED_simpleTest){
     X x;
     x.a = 0x09202021;
     printf("%x, %x", x.b, x.c);
+}
+
+TEST(TreeEasyTest, findModeTest)
+{
+    Solution so;
+    TreeNode* root = so.createTreeNode(1);
+    TreeNode* root_left = so.insertSubTree(root, 2, TREENODE_DIRECTION::LEFT);
+    TreeNode* root_right = so.insertSubTree(root, 2, TREENODE_DIRECTION::RIGHT);
+    so.insertSubTree(root_left, 3, TREENODE_DIRECTION::LEFT);
+    so.insertSubTree(root_left, 4, TREENODE_DIRECTION::RIGHT);
+    so.insertSubTree(root_right, 3, TREENODE_DIRECTION::LEFT);
+    so.insertSubTree(root_right, 6, TREENODE_DIRECTION::RIGHT);
+    printAllTreeNodesLevelOrder(root);
+    std::cout << "========" << std::endl;
+    auto result = so.findMode(root);
+    for(std::size_t i = 0; i < result.size(); i++){
+        std::cout << result[i] << std::endl;
+    }
 }

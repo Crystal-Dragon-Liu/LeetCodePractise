@@ -2,6 +2,8 @@
 #define UTILS_H
 #include "common/config.h"
 #include <memory>
+#include <queue>
+#include <iostream>
 //   Definition for singly-linked list.
   struct ListNode {
       int val;
@@ -24,6 +26,23 @@ struct TreeNode {
       TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
       TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  };
+
+inline void printAllTreeNodesLevelOrder(TreeNode* root){
+    if(!root) return;
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()){
+        std::size_t size = q.size();
+        for(std::size_t i = 0; i < size; i++){
+            TreeNode* node = q.front();
+            q.pop();
+            std::cout << node->val << " ";
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right);
+        }
+        std::cout << std::endl;
+    }
+}
 
 /**
  * Definition for n-tree node.
@@ -768,6 +787,11 @@ extern std::vector<int> splitInt(int n);
 extern void printLinkedNodes(ListNode* start_node);
 extern void DELETE_NODE(ListNode* node);
 
+enum class TREENODE_DIRECTION
+{
+    LEFT,
+    RIGHT   
+};
 
 //=========================================================================================
 //  ? 173. Binary Search Tree Iterators

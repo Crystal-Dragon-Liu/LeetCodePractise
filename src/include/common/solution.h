@@ -6,10 +6,12 @@
 #include <queue>
 #include <unordered_map>
 #include <memory>
+
 using TreeNodePtr = std::shared_ptr<TreeNode>;
 class Solution
 {
     public:
+            ~Solution(){clearTreeNodes();}
             //easy  141. linked list cycle
             bool                                hasCycle(ListNode* head);
             //normal 142.Linked List Cycle 2
@@ -240,8 +242,14 @@ class Solution
             // 700. Search in a Binary Search Tree
             TreeNode*                           searchBST(TreeNode* root, int val);
             TreeNode*                           searchBSTIter(TreeNode* root, int val);
-
-
+            // 530. Minimum Absolute Difference in BST
+            int                                 getMinimumDifference(TreeNode* root);
+            void                                getMinimumDifferenceRecursive(TreeNode* root, std::vector<int>& helperVec);
+            void                                getMinimumDifferenceRecursiveV2(TreeNode* root);
+            int                                 getMinimumDifferenceIteration(TreeNode* root);
+            // easy 501. Find Mode in Binary Search Tree
+            std::vector<int>                    findMode(TreeNode* root);
+            std::vector<int>                    findModeV2(TreeNode* root);
 
             // delete all the TreeNode ptr.
             void                                clearTreeNodes(){
@@ -250,23 +258,55 @@ class Solution
                         for(std::size_t i = 0; i < size; i++){delete _TreeNodeVec[i];}
             }
 
+            /*create TreeNode with value expected.*/
+           TreeNode*                            createTreeNode(int val){
+                   TreeNode* node = new TreeNode(val);
+                   _TreeNodeVec.push_back(node);
+                   return node;
+           }
+
+           TreeNode*                            insertSubTree(TreeNode* node, int val, TREENODE_DIRECTION node_direction){
+                   if(!node) return nullptr;
+                   for(std::size_t i = 0; i < _TreeNodeVec.size(); i++){
+                           if(_TreeNodeVec[i] == node){
+                                   TreeNode* new_node = new TreeNode(val);
+                                   switch (node_direction)
+                                   {
+                                   case TREENODE_DIRECTION::LEFT :{
+                                           node->left = new_node;
+                                           break;
+                                   }
+                                   case TREENODE_DIRECTION::RIGHT:{
+                                           node->right = new_node;
+                                           break;
+                                   }
+                                   default:
+                                           break;
+                                   }
+                                   _TreeNodeVec.push_back(new_node);
+                                   return new_node;
+                           }
+                   }
+                   return nullptr;
+           }
+
     private:
             int                             post_index;
             std::unordered_map<int, int>    idx_map;
     public:
             TreeNode*                       ans;
-
             // 113. Path Sum II
             std::vector<std::vector<int> > _path_set;
             std::vector<int>               _path;
             // 129. path sum
             std::vector<int>               _sumPathSet;
             int                            _sumPath;
-
             // 513
             int                            _MaxLeftValue;
             int                            _MaxDepth;     
             // 106
             std::vector<TreeNode*>         _TreeNodeVec;
+            // 530
+            int                            _minValue;
 };
 #endif

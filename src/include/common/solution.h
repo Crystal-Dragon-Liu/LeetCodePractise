@@ -250,6 +250,7 @@ class Solution
             // easy 501. Find Mode in Binary Search Tree
             std::vector<int>                    findMode(TreeNode* root);
             std::vector<int>                    findModeV2(TreeNode* root);
+            void                                findModeV2Helper(TreeNode* root);
 
             // delete all the TreeNode ptr.
             void                                clearTreeNodes(){
@@ -295,18 +296,17 @@ class Solution
             std::unordered_map<int, int>    idx_map;
     public:
             TreeNode*                       ans;
-            // 113. Path Sum II
-            std::vector<std::vector<int> > _path_set;
+            std::vector<std::vector<int> > _path_set;/// 113. Path Sum II
             std::vector<int>               _path;
-            // 129. path sum
-            std::vector<int>               _sumPathSet;
+            std::vector<int>               _sumPathSet; /// 129. path sum
             int                            _sumPath;
-            // 513
-            int                            _MaxLeftValue;
+            int                            _MaxLeftValue; /// 513
             int                            _MaxDepth;     
-            // 106
-            std::vector<TreeNode*>         _TreeNodeVec;
-            // 530
-            int                            _minValue;
+            std::vector<TreeNode*>         _TreeNodeVec; /// 106
+            int                            _minValue; /// 530
+            int                            _maxCount; /// 501
+            int                            _count;
+            TreeNode*                      _pre;
+            std::vector<int>               _result; /// a general vector storing data with int type.
 };
 #endif

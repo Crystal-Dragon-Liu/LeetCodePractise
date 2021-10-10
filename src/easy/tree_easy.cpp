@@ -851,4 +851,39 @@ std::vector<int>  Solution::findMode(TreeNode* root){
 }
 
 std::vector<int>  Solution::findModeV2(TreeNode* root){
+    _maxCount = 0;
+    _count = 0;
+    _pre = nullptr;
+    findModeV2Helper(root);
+    return _result;
+}
+void  Solution::findModeV2Helper(TreeNode* cur){
+    if(!cur) return;
+    findModeV2Helper(cur->left);
+    /// process data
+    /// count the frequence of nums by _count,
+    //  compare the _pre and cur, the _pre set to nullptr stands for cur is ptr to the first,
+    //  the _count should be set to 1, there is no need to consider the backward TreeNode*.
+    //  TreeNode. if _pre->val is equal to cur->val, then the counter --- _count should be incremented by 1
+    //  else we should reset the _count.
+    if(_pre == nullptr) _count = 1;
+    else if(_pre->val == cur->val) _count++;
+    else _count = 1;
+    // ! update the _maxCount
+    // if _count is bigger than _maxCount, 
+    // the _result should be clear becasue the elements in this _result is no longer mode.
+    // and the cur->val should replace them.
+    // if _count is equal to _maxCount, then there is another TreeNode whose val is the mode we interested.
+    // push back this val to _result.
+    if(_count > _maxCount){
+        _maxCount = _count;
+        _result.clear();
+        _result.push_back(cur->val);
+    }
+    else if(_count == _maxCount){
+        _result.push_back(cur->val);
+    }
+    _pre = cur;
+    findModeV2Helper(cur->right);
+    return;
 }

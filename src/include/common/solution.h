@@ -94,6 +94,7 @@ class Solution
             // easy 剑指 Offer 68 - II. 二叉树的最近公共祖先
             TreeNode*                           lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q);
             bool                                dfsForLowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q);
+            TreeNode*                           lowestCommonAncestorHelper(TreeNode*root, TreeNode* p, TreeNode* q);
             // hard 297. Serialize and Deserialize Binary Tree
             std::string                         serialize(TreeNode* root);
             TreeNode*                           deserialize(std::string data);

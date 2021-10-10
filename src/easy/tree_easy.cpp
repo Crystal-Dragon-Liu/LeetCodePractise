@@ -185,13 +185,32 @@ bool  Solution::dfsForLowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode
     return lson || rson || (root->val == p->val) || (root->val == q->val); 
 }
 
+TreeNode* Solution::lowestCommonAncestorHelper(TreeNode*root, TreeNode* p, TreeNode* q){
+    // if root->left contains p, and root->right contains q or vise versa
+    // the root is the lowest common ancestor.
+    // if root is set to nullptr, return nullptr;
+    //
+    if(!root) return nullptr;
+    if(root == q || root == p) return root;
+    auto lson = lowestCommonAncestorHelper(root->left, p, q);
+    auto rson = lowestCommonAncestorHelper(root->right, p, q);
+    if(lson && rson) return root;
+    if(!rson && lson) return lson;
+    else if(!lson && rson) return rson;
+    else {
+        return nullptr;
+    }
+}
+
+
 TreeNode*  Solution::lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q)
 {
     /// condition ->  flson && frson || ((x == q || x == p) && (flson || frson) )
     dfsForLowestCommonAncestor(root, p, q);
     return ans;
-
 }
+
+
 
 //===================                100. Same Tree            ============================
 // Given the roots of two binary trees p and q, 
